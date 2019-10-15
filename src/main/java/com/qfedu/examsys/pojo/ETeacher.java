@@ -7,6 +7,8 @@ public class ETeacher {
 
     private String tpassword;
 
+    private Integer rid;//角色表的id
+
     public Integer getTid() {
         return tid;
     }
