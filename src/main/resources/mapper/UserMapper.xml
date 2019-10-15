@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qfedu.examsys.dao.UserDao">
+
+    <resultMap id="UserMap" type="com.qfedu.examsys.pojo.EUser">
+        <id column="uid" property="uid"></id>
+        <result column="uname" property="uname"></result>
+        <result column="upassword" property="upassword"></result>
+    </resultMap>
+
+    <sql id="user">
+        uid, uname, upassword
+    </sql>
+
+    <select id="findAll" resultMap="UserMap">
+        select <include refid="user"></include> from e_user
+    </select>
+
+    <select id="findById" parameterType="integer" resultMap="UserMap">
+        select <include refid="user"></include> from e_user where uid = #{uid}
+    </select>
+
+    <select id="findByName" parameterType="string" resultMap="UserMap">
+        select <include refid="user"></include> from e_user where uname = #{uname}
+    </select>
+
+    <insert id="add" parameterType="com.qfedu.examsys.pojo.EUser">
+        insert into e_user(uname, upassword) values(#{uname}, #{upassword})
+    </insert>
+
+    <delete id="delete" parameterType="integer">
+        delete from e_user where uid = #{uid}
+    </delete>
+
+    <update id="update" parameterType="com.qfedu.examsys.pojo.EUser">
+        update e_user set uname=#{uname}, upassword=#{upassword} where uid=#{uid}
+    </update>
+</mapper>
