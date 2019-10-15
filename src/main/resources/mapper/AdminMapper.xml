@@ -5,7 +5,9 @@
 <mapper namespace="com.qfedu.examsys.dao.AdminDao">
 
         
-    <resultMap id="menuMap" type=""
+    <resultMap id="menuMap" type="com.qfedu.examsys.pojo.EAdmin">
+
+    </resultMap>
     
     
     
