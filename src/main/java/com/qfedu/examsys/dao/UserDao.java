@@ -1,6 +1,7 @@
 package com.qfedu.examsys.dao;
 
 import com.qfedu.examsys.pojo.EUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -35,6 +36,13 @@ public interface UserDao {
     EUser findByName(String uname);
 
     /**
+     * 根据编号查询用户
+     * @param unumber
+     * @return
+     */
+    EUser findByNumber(String unumber);
+
+    /**
      * 增加普通用户
      * 既可以在后台管理用户时使用
      * 也可以在前台注册新用户时使用
@@ -53,4 +61,16 @@ public interface UserDao {
      * @param eUser
      */
     void update(EUser eUser);
+
+    /**
+     * 多条件查询
+     * @param unumber
+     *      用户编号
+     * @param uname
+     *      用户姓名
+     * @param uprofession
+     *      用户专业
+     * @return
+     */
+    List<EUser> findByCondition(@Param("unumber") String unumber, @Param("uname") String uname, @Param("uprofession") String uprofession);
 }
