@@ -7,6 +7,8 @@ public class EUser {
 
     private String upassword;
 
+    private Integer rid;//角色表的id
+
     public Integer getUid() {
         return uid;
     }
