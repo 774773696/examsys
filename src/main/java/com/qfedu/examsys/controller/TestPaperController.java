@@ -32,10 +32,6 @@ public class TestPaperController {
         map.put("msg", "");
         map.put("count", total);
         map.put("data", list);
-        System.out.println("--------------------");
-        System.out.println(list.toString());
-        System.out.println(map.toString());
-        System.out.println("---------------------");
         return map;
     }
     @RequestMapping("/findAllYnquestions.do")
@@ -43,9 +39,6 @@ public class TestPaperController {
 
         List<EYnquestions> list = testPaperService.findAllYnquestions(page,limit);
         long total = ((Page) list).getTotal();
-        for (EYnquestions li:list){
-            System.out.println(li);
-        }
         Map<String, Object> map = new HashMap<>();
 
         map.put("code", 0);
@@ -77,9 +70,7 @@ public class TestPaperController {
 
         List<EAnswerquestions> list = testPaperService.findAllAnswerquestions(page,limit);
         long total = ((Page) list).getTotal();
-        for (EAnswerquestions li:list){
-            System.out.println(li);
-        }
+
         Map<String, Object> map = new HashMap<>();
 
         map.put("code", 0);
