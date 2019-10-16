@@ -7,6 +7,8 @@ public class EAdmin {
 
     private String apassword;
 
+    private Integer rid;  //角色表的id
+
     public Integer getAid() {
         return aid;
     }
