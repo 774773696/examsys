@@ -69,6 +69,7 @@ public class ESessionMangeController {
 
     @RequestMapping("/addSessionMange.do")
     public JsonBean addSessionMange(ESmVo eSmVo) {
+        // 此处需要添加试卷的查询方法，先查询再进行考试场次管理里进行添加
         eSessionMangeService.addSessionMange(eSmVo);
         return new JsonBean(0, null);
     }
