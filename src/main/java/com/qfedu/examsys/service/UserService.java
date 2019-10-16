@@ -24,7 +24,7 @@ public interface UserService {
      * 查询所有
      * @return
      */
-    List<EUser> findAll();
+    List<EUser> findAll(Integer page, Integer limit);
 
     /**
      * 修改信息前查询该用户
@@ -32,6 +32,8 @@ public interface UserService {
      * @return
      */
     EUser findById(Integer id);
+
+    EUser findByNumber(String number);
 
     /**
      * 增加用户 注册用户
@@ -50,4 +52,6 @@ public interface UserService {
      * @param eUser
      */
     void update(EUser eUser);
+
+    List<EUser> findByCondition(String unumber, String uname, String uprofession, Integer page, Integer limit);
 }
