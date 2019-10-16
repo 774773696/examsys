@@ -30,4 +30,9 @@ public class TestPaperServiceImpl implements TestPaperService {
     public List<ESinglequestions> findAllSingleQuestions() {
         return singlequestionsDao.findAllSingleQuestions();
     }
+
+    @Override
+    public void importSinglequestions() {
+
+    }
 }
