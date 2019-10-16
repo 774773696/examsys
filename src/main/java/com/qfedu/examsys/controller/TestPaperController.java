@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class TestPaperConterllor {
+public class TestPaperController {
 
     @Autowired
     TestPaperService testPaperService;
