@@ -5,14 +5,31 @@
 <mapper namespace="com.qfedu.examsys.dao.AdminDao">
 
         
-    <resultMap id="menuMap" type=""
-    
-    
-    
-    
+    <resultMap id="menuMap" type="com.qfedu.examsys.pojo.MenuInfo">
+        <id property="menuId" column="pid"></id>
+        <result property="menuName" column="pname"></result>
+        <result property="url" column="url"></result>
+        <collection property="childMenu" javaType="list" ofType="com.qfedu.examsys.pojo.MenuInfo">
+            <id property="menuId" column="cid"></id>
+            <result property="menuName" column="cname"></result>
+            <result property="url" column="curl"></result>
+        </collection>
+    </resultMap>
+
 
     <select id="findByAdminName" resultType="com.qfedu.examsys.pojo.EAdmin">
         select * from e_admin where aname = #{name}
+    </select>
+
+    <select id="findMenu" resultMap="menuMap">
+        select p.pid,p.pname,p.url,c.pid cid,c.pname cname,c.url curl from e_permission  p
+            inner join  e_permission c
+            on p.pid = c.parentId
+            inner join e_role_perm rp
+            on rp.pid = c.pid
+            inner join e_admin a
+            on a.rid = rp.rid
+            where c.type = 1 and a.aid = #{id}
     </select>
     
     
