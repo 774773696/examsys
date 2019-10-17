@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author TiAmo
@@ -51,5 +52,10 @@ public interface ESessionMangeDao {
      */
     public void modifySessionMange(ESmVo eSmVo);
 
+    /**
+     * 添加考试场次
+     * @param eSmVo
+     */
     public void addSessionMange(ESmVo eSmVo);
+
 }

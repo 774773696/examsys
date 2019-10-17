@@ -4,6 +4,7 @@ import com.qfedu.examsys.vo.ESmVo;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author TiAmo
@@ -23,4 +24,10 @@ public interface ESessionMangeService {
     public void modifySessionMange(ESmVo eSmVo);
 
     public void addSessionMange(ESmVo eSmVo);
+
+    /**
+     * 添加场次信息时选择科目联动菜单的实现
+     * @return
+     */
+    public List<Map<String, Object>> groupSessionType();
 }

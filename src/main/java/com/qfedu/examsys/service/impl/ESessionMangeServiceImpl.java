@@ -2,13 +2,17 @@ package com.qfedu.examsys.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.qfedu.examsys.dao.ESessionMangeDao;
+import com.qfedu.examsys.dao.SubjectDao;
+import com.qfedu.examsys.dao.TestPaperDao;
+import com.qfedu.examsys.pojo.ESubject;
+import com.qfedu.examsys.pojo.ETestpaper;
 import com.qfedu.examsys.service.ESessionMangeService;
+import com.qfedu.examsys.service.TestPaperService;
 import com.qfedu.examsys.vo.ESmVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author TiAmo
@@ -20,6 +24,15 @@ public class ESessionMangeServiceImpl implements ESessionMangeService {
 
     @Autowired(required = false)
     private ESessionMangeDao eSessionMangeDao;
+
+    @Autowired(required = false)
+    private SubjectDao subjectDao;
+
+    @Autowired(required = false)
+    private TestPaperDao testPaperDao;
+
+    @Autowired
+    private TestPaperService testPaperService;
 
 
     @Override
@@ -52,5 +65,20 @@ public class ESessionMangeServiceImpl implements ESessionMangeService {
     @Override
     public void addSessionMange(ESmVo eSmVo) {
         eSessionMangeDao.addSessionMange(eSmVo);
+    }
+
+    @Override
+    public List<Map<String, Object>> groupSessionType() {
+        List<ESubject> subjects = subjectDao.findAllSubject();
+        List<Map<String,Object>> list = new ArrayList<>();
+        for (ESubject eSubject : subjects) {
+            List<ETestpaper> list_testpaper = testPaperService.findtestPaperBySubjectId(eSubject.getsubjectId());
+            Map<String,Object> map = new HashMap<>();
+            map.put("eSubject",eSubject);
+            map.put("testpaper", list_testpaper);
+            list.add(map);
+        }
+        return list;
+
     }
 }

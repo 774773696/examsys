@@ -1,23 +1,23 @@
 package com.qfedu.examsys.pojo;
 
 public class ESubject {
-    private Integer subjectid;
+    private Integer subjectId;
 
-    private String subjectname;
+    private String subjectName;
 
-    public Integer getSubjectid() {
-        return subjectid;
+    public Integer getsubjectId() {
+        return subjectId;
     }
 
-    public void setSubjectid(Integer subjectid) {
-        this.subjectid = subjectid;
+    public void setsubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
     }
 
-    public String getSubjectname() {
-        return subjectname;
+    public String getsubjectName() {
+        return subjectName;
     }
 
-    public void setSubjectname(String subjectname) {
-        this.subjectname = subjectname == null ? null : subjectname.trim();
+    public void setsubjectName(String subjectName) {
+        this.subjectName = subjectName == null ? null : subjectName.trim();
     }
 }

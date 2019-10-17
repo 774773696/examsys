@@ -11,7 +11,7 @@ public class ETestpaper {
 
     private Integer tpscore;
 
-    private Integer subjectid;
+    private Integer subjectId;
 
     private String tpcontext;
 
@@ -55,12 +55,12 @@ public class ETestpaper {
         this.tpscore = tpscore;
     }
 
-    public Integer getSubjectid() {
-        return subjectid;
+    public Integer getsubjectId() {
+        return subjectId;
     }
 
-    public void setSubjectid(Integer subjectid) {
-        this.subjectid = subjectid;
+    public void setsubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
     }
 
     public String getTpcontext() {

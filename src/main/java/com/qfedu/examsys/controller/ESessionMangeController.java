@@ -5,10 +5,7 @@ import com.qfedu.examsys.common.JsonBean;
 import com.qfedu.examsys.service.ESessionMangeService;
 import com.qfedu.examsys.vo.ESmVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -72,5 +69,17 @@ public class ESessionMangeController {
         // 此处需要添加试卷的查询方法，先查询再进行考试场次管理里进行添加
         eSessionMangeService.addSessionMange(eSmVo);
         return new JsonBean(0, null);
+    }
+
+    /**
+     * 添加场次时显示科目的二级联动菜单
+     */
+    @RequestMapping("/subjectmenu.do")
+    public JsonBean findSubjectMenu() {
+        List<Map<String, Object>> list = eSessionMangeService.groupSessionType();
+        Map<String, Object> map = new HashMap<>();
+        map.put("group", list);
+        return new JsonBean(0, map);
+
     }
 }

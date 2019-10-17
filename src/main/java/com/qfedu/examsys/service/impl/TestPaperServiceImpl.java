@@ -26,6 +26,9 @@ public class TestPaperServiceImpl implements TestPaperService {
     @Autowired(required = false)
     private AnswerquestionsDao answerquestionsDao;
 
+    @Autowired(required = false)
+    private TestPaperDao testPaperDao;
+
 
     //查询所有的科目
     @Override
@@ -60,6 +63,11 @@ public class TestPaperServiceImpl implements TestPaperService {
     public List<EAnswerquestions> findAllAnswerquestions(Integer page, Integer limit) {
         PageHelper.startPage(page,limit);
         return answerquestionsDao.findAllAnswerquestions();
+    }
+
+    @Override
+    public List<ETestpaper> findtestPaperBySubjectId(Integer subjectId) {
+        return testPaperDao.findtestPaperBySubjectId(subjectId);
     }
 
     @Override
