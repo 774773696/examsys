@@ -16,7 +16,7 @@ public interface ESessionMangeService {
 
     public ESmVo findSessionMangeById(Integer smid);
 
-    public void deleteSessionMange(int[] smids);
+    public void deleteSessionMange(Integer[] smids);
 
     public void deleteSessionMangeById(Integer smid);
 

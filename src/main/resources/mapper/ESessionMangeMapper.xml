@@ -14,8 +14,8 @@
             <if test="tpTitle != null and tpTitle != ''">
                 and et.tpTitle like CONCAT('%','${tpTitle}','%')
             </if>
-            <if test="smBeginTime != null and smBeginTime !=''">
-                DATE_FORMAT(createTime,'%Y-%m-%d') = DATE_FORMAT(#{beginTime},'%Y-%m-%d')
+            <if test="smBeginTime != null">
+                and DATE_FORMAT(smBeginTime,'%Y-%m-%d') >= DATE_FORMAT(#{smBeginTime},'%Y-%m-%d')
             </if>
             <if test="subjectName != null and subjectName != ''">
                 and es.subjectName=#{subjectName}
@@ -29,11 +29,11 @@
     </select>
 
     <delete id="deleteSessionMange" parameterType="int">
-        delete from e_sessionmange where smid in
-        <foreach collection="array" item="smid" open="(" close= ")" separator=",">
-            #{smids}
-        </foreach>
-    </delete>
+    delete from e_sessionmange where smid in
+    <foreach collection="array" item="smid" open="(" close= ")" separator=",">
+        #{smid}
+    </foreach>
+</delete>
 
     <delete id="deleteSessionMangeById" parameterType="integer">
         delete from e_sessionmange where smid=#{smid}

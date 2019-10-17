@@ -36,7 +36,7 @@ public interface ESessionMangeDao {
      * 批量删除
      * @param smids 选中的id
      */
-    public void deleteSessionMange(int[] smids);
+    public void deleteSessionMange(Integer[] smids);
 
     /**
      * 根据指定id删除考试场次

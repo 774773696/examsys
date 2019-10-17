@@ -35,7 +35,7 @@ public class ESessionMangeServiceImpl implements ESessionMangeService {
     }
 
     @Override
-    public void deleteSessionMange(int[] smids) {
+    public void deleteSessionMange(Integer[] smids) {
         eSessionMangeDao.deleteSessionMange(smids);
     }
 

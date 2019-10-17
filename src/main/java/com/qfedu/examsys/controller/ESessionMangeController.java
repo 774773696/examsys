@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -21,9 +22,7 @@ import java.util.Map;
  * @date 2019/10/15 11:20
  * 考试场次管理控制类
  */
-@CrossOrigin
-@Controller
-@ResponseBody
+@RestController
 public class ESessionMangeController {
 
     @Autowired
@@ -44,7 +43,8 @@ public class ESessionMangeController {
     }
 
     @RequestMapping("/deletesm.do")
-    public JsonBean deleteSessionMange(int[] smids) {
+    public JsonBean deleteSessionMange(Integer[] smids) {
+        System.out.println(smids);
         eSessionMangeService.deleteSessionMange(smids);
         return new JsonBean(0, null);
     }
