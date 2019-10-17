@@ -35,6 +35,7 @@ public interface ESessionMangeDao {
     /**
      * 批量删除
      * @param smids 选中的id
+     * 此处数组类型使用Integer 使用int时会出现类型转换错误
      */
     public void deleteSessionMange(Integer[] smids);
 
