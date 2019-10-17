@@ -9,10 +9,16 @@
         <id column="uid" property="uid"></id>
         <result column="uname" property="uname"></result>
         <result column="upassword" property="upassword"></result>
+        <result column="unumber" property="unumber"></result>
+        <result column="usex" property="usex"></result>
+        <result column="uage" property="uage"></result>
+        <result column="uprofession" property="uprofession"></result>
+        <result column="ugrade" property="ugrade"></result>
+        <result column="uphone" property="uphone"></result>
     </resultMap>
 
     <sql id="user">
-        uid, uname, upassword
+        uid, uname, upassword, unumber, usex, uage, uprofession, ugrade, uphone
     </sql>
 
     <select id="findAll" resultMap="UserMap">
@@ -27,8 +33,13 @@
         select <include refid="user"></include> from e_user where uname = #{uname}
     </select>
 
+    <select id="findByNumber" parameterType="string" resultMap="UserMap">
+        select <include refid="user"></include> from e_user where unumber = #{unumber}
+    </select>
+
     <insert id="add" parameterType="com.qfedu.examsys.pojo.EUser">
-        insert into e_user(uname, upassword) values(#{uname}, #{upassword})
+        insert into e_user(uname, upassword, unumber, usex, uage, uprofession, ugrade, uphone)
+        values(#{uname}, #{upassword}, #{unumber}, #{usex}, #{uage}, #{uprofession}, #{ugrade}, #{uphone})
     </insert>
 
     <delete id="delete" parameterType="integer">
@@ -38,4 +49,19 @@
     <update id="update" parameterType="com.qfedu.examsys.pojo.EUser">
         update e_user set uname=#{uname}, upassword=#{upassword} where uid=#{uid}
     </update>
+
+    <select id="findByCondition" parameterType="map" resultMap="UserMap">
+        select <include refid="user"></include> from e_user
+        <where>
+            <if test="uname != null">
+                uname = #{uname}
+            </if>
+            <if test="unumber != null">
+                and unumber = #{unumber}
+            </if>
+            <if test="uprofession != null">
+                and uprofession = #{uprofession}
+            </if>
+        </where>
+    </select>
 </mapper>

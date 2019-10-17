@@ -1,7 +1,7 @@
 package com.qfedu.examsys.pojo;
 
 public class EMulquestions {
-    private Integer mqid;
+    private int mqId;
 
     private String mtitle;
 
@@ -15,12 +15,12 @@ public class EMulquestions {
 
     private String manswer;
 
-    public Integer getMqid() {
-        return mqid;
+    public Integer getMqId() {
+        return mqId;
     }
 
-    public void setMqid(Integer mqid) {
-        this.mqid = mqid;
+    public void setMqId(Integer mqId) {
+        this.mqId = mqId;
     }
 
     public String getMtitle() {

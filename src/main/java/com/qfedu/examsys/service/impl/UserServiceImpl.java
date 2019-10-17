@@ -1,5 +1,6 @@
 package com.qfedu.examsys.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.qfedu.examsys.dao.UserDao;
 import com.qfedu.examsys.pojo.EUser;
 import com.qfedu.examsys.service.UserService;
@@ -38,13 +39,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<EUser> findAll() {
-        return userDao.findAll();
+    public List<EUser> findAll(Integer page, Integer limit) {
+
+        PageHelper.startPage(page, limit);
+        List<EUser> userList = userDao.findAll();
+
+        return userList;
     }
 
     @Override
     public EUser findById(Integer id) {
         return userDao.findById(id);
+    }
+
+    @Override
+    public EUser findByNumber(String number) {
+        return userDao.findByNumber(number);
     }
 
     @Override
@@ -67,5 +77,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(EUser eUser) {
         userDao.update(eUser);
+    }
+
+    @Override
+    public List<EUser> findByCondition(String unumber, String uname, String uprofession, Integer page, Integer limit) {
+
+        PageHelper.startPage(page, limit);
+
+        List<EUser> userList = userDao.findByCondition(unumber, uname, uprofession);
+
+        return userList;
     }
 }

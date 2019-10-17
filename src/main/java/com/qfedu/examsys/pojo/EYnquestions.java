@@ -1,18 +1,18 @@
 package com.qfedu.examsys.pojo;
 
 public class EYnquestions {
-    private Integer yqid;
+    private int yqId;
 
     private String ytitle;
 
     private Integer yanswer;
 
-    public Integer getYqid() {
-        return yqid;
+    public Integer getYqId() {
+        return yqId;
     }
 
-    public void setYqid(Integer yqid) {
-        this.yqid = yqid;
+    public void setYqId(Integer yqId) {
+        this.yqId = yqId;
     }
 
     public String getYtitle() {

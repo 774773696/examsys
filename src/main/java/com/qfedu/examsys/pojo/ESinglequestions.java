@@ -1,7 +1,7 @@
 package com.qfedu.examsys.pojo;
 
 public class ESinglequestions {
-    private Integer sqid;
+    private int sqId;
 
     private String stitle;
 
@@ -15,12 +15,12 @@ public class ESinglequestions {
 
     private String sanswer;
 
-    public Integer getSqid() {
-        return sqid;
+    public int getSqId() {
+        return sqId;
     }
 
-    public void setSqid(Integer sqid) {
-        this.sqid = sqid;
+    public void setSqId(int sqId) {
+        this.sqId = sqId;
     }
 
     public String getStitle() {
@@ -69,5 +69,18 @@ public class ESinglequestions {
 
     public void setSanswer(String sanswer) {
         this.sanswer = sanswer == null ? null : sanswer.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "ESinglequestions{" +
+                "sqId=" + sqId +
+                ", stitle='" + stitle + '\'' +
+                ", soptiona='" + soptiona + '\'' +
+                ", soptionb='" + soptionb + '\'' +
+                ", soptionc='" + soptionc + '\'' +
+                ", soptiond='" + soptiond + '\'' +
+                ", sanswer='" + sanswer + '\'' +
+                '}';
     }
 }
