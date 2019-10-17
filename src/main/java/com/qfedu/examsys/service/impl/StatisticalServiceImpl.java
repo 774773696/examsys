@@ -1,4 +1,4 @@
-package com.qfedu.examsys.service.StatisticalServiceImpl;
+package com.qfedu.examsys.service.impl;
 
 import com.qfedu.examsys.dao.StatisticalDao;
 import com.qfedu.examsys.service.StatisticalService;
