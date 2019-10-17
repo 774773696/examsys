@@ -2,7 +2,7 @@ package com.qfedu.examsys.pojo;
 
 public class ESubject {
     private Integer subjectId;
-
+    // 驼峰
     private String subjectName;
 
     public Integer getsubjectId() {
