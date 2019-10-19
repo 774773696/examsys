@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+    <title>
+    	更改考试场次信息
+    </title>
+    <link rel="stylesheet" href="layui/css/layui.css" />
+    <script type="text/javascript" src="layui/layui.js" ></script>
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js" ></script>
+    <script type="text/javascript" src="js/gainUrlparameter.js"></script>
+	</head>
+	<body>
+
+
+<div style="margin-left:80px">
+    <form class="layui-form" id="add-form" action="" lay-filter="modifyForm" >
+    	<input type="hidden" name="smid" id="smid">
+        <div class="layui-form-item" style="margin-top: 10px">
+       
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 90px">更改考试试卷</label>
+            <div class="layui-input-inline" style="width: 240px">
+                <select name="tpid" id="tpid"  class="tpid" lay-verify="required">
+                    <option value="">请选择考试试卷</option>
+                </select>
+            </div>
+        </div>
+       
+        <div class="layui-form-item" style="margin-top: 10px">
+            <label class="layui-form-label" style="width: 90px">更改开考时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="smBeginTime" id="smBeginTime" required style="width: 240px" lay-verify="required" placeholder="格式：2019-10-09 08:00:00"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-top: 10px">
+            <label class="layui-form-label" style="width: 90px">更改结束时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="smEndTime" id="smEndTime" required style="width: 240px" lay-verify="required" placeholder="格式：2019-10-09 08:00:00"  class="layui-input">
+            </div>
+        </div>
+      
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="save2" >提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    layui.use(['layer','form','laydate', 'element'],function () {
+        var layer = layui.layer
+            ,form = layui.form
+            ,element = layui.element //元素操作
+             
+            ,laydate = layui.laydate;
+            var smida = decodeURI($.getUrlVar('smid'));
+            var smid=parseInt(smida);
+            console.log(smid);
+            
+             //日期时间选择器
+			 var ins22 = laydate.render({
+			    elem: '#smBeginTime'
+			    ,type: 'datetime'
+			    ,min:'new Date()'
+			    ,max: '2021-10-14'
+			    ,format:'yyyy-MM-dd HH:mm'
+			    ,trigger: 'click'
+			    ,ready: function(){
+			      ins22.hint('日期可选值设定在 :<br> 今日 到 2021-10-14');
+		    }
+			  });
+			  
+			 var ins23 = laydate.render({
+			    elem: '#smEndTime'
+			    ,type: 'datetime'
+			    ,min:'new Date()'
+			    ,max: '2021-10-14'
+			    ,format:'yyyy-MM-dd HH:mm'
+			    ,trigger: 'click'
+			    ,ready: function(){
+			      ins23.hint('日期可选值设定在 :<br> 今日 到 2021-10-14');
+		    }
+			  });
+            
+            selectSessionMenu();
+           
+			// 初始化整体数据
+        $.ajax({
+            type:"get",
+            url:"findsmone.do",
+            data: {'smid':smid},
+            async:false,
+            dataType:"json",
+            success:function(data){
+                if(data.code == 0){
+                    //表单初始赋值
+                    form.val('modifyForm', {
+                        'smid':data.info.smid,
+                     
+                        'smBeginTime':data.info.smBeginTime,
+                        'smEndTime':data.info.smEndTime
+                    });
+                }else{
+                    alert(data.info);
+                }
+            }
+        });	
+
+
+
+        form.on('submit(save2)', function(data){
+            $.ajax({
+                type:"post",
+                url:"modifySessionMange.do",
+                data:data.field,
+                dataType:"json",
+                success:function(data){  
+                    if(data.code == 0){
+                       
+                        layer.msg("修改成功")
+                        var t = parent.layui.table;
+                        t.reload('videoTable');// 重新加载页面,demo 表示父窗体table标签的id值
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    }else{
+                        layer.msg(data.info);
+                    }
+                },
+                error:function (data) {
+                    alert("ajax:error")
+                }
+            })
+            // 阻止默认的提交
+            return false;
+        });
+
+
+
+        function selectSessionMenu() {
+            $.ajax({
+                type:"post",
+                url:"findAllTestPaper.do",
+                dataType:"json",
+                success:function(data){
+                   var list=data.info;
+				   var tpid = $(".tpid")
+				   for(var i=0;i<list.length;i++){
+				   	var option = $("<option value ="+list[i].tpid+">"+list[i].tptitle+"</option>>");
+                        tpid.append(option)
+				   }
+         								
+         	form.render("select");
+                }
+            });
+        }
+
+    });
+
+
+
+
+</script>
+
+	</body>
+</html>

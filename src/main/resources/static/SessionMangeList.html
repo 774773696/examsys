@@ -20,7 +20,7 @@
         <div class="layui-form-item">
             <div class="layui-inline" style="margin-left: 20px">
                 <div class="layui-btn-group demoTable">
-                    <button type="button" class="layui-btn" data-method="setTop"> <i class="layui-icon">&#xe608;</i> 添加</button>
+                    <button type="button" class="layui-btn" data-method="setTop" id="addsm"> <i class="layui-icon">&#xe608;</i> 添加</button>
                     <button class="layui-btn"  data-type="getCheckData" >批量删除<span class="layui-badge " id="checkedNum">0</span></button>
                 </div>
             </div>
@@ -47,18 +47,18 @@
     <div id="add-main" style="display: none;margin-left:80px" >
         <form class="layui-form" id="add-form" action="" onsubmit="return false" >
             
-            <div class="layui-form-item">
+            <!--<div class="layui-form-item">
                 <label class="layui-form-label" style="width: 90px">考试科目</label>
                 <div class="layui-input-inline" style="width: 240px">
-                    <select name="subjectName" id="subjectName"  class="subjectName" lay-verify="required">
+                    <select name="subjectId" id="subjectId"  class="subjectId" lay-filter="test" lay-verify="required">
                         <option value="">请选择科目</option>
                     </select>
                 </div>
-            </div>
+            </div>-->
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 90px">考试试卷</label>
                 <div class="layui-input-inline" style="width: 240px">
-                    <select id="course_id" name="course_id" class="course"  lay-verify="required">
+                    <select id="tpid" name="tpid" class="tpid"  >
                         <option value="">请选择试卷</option>
                     </select>
                 </div>
@@ -67,8 +67,8 @@
                 <label class="layui-form-label" style="width: 90px">开始时间</label>
                 <div class="layui-input-inline" style="width: 240px">
                     <div class="layui-input-inline">
-						<input type="text" class="layui-input" id="test-limit1" placeholder="yyyy-MM-dd" lay-verify="required"><br/>
-						<input type="text" class="layui-input" id="test-limit3" placeholder="HH:mm:ss" lay-verify="required">
+                    	 <input type="text" class="layui-input" name="smBeginTime" id="smBeginTime" placeholder="格式：2019-10-09 08:00" lay-verify="required">
+						
 					</div>
                 </div>
             </div>
@@ -76,8 +76,8 @@
                 <label class="layui-form-label" style="width: 90px">结束时间</label>
                 <div class="layui-input-inline" style="width: 240px">
                     <div class="layui-input-inline">
-						<input type="text" class="layui-input" id="test-limit2" placeholder="yyyy-MM-dd" lay-verify="required"><br/>
-						<input type="text" class="layui-input" id="test-limit4" placeholder="HH:mm:ss" lay-verify="required">
+						<input type="text" class="layui-input" name="smEndTime" id="smEndTime" placeholder="格式：2019-10-09 08:00" lay-verify="required">
+						<span id="passMsg"></span>
 					</div>
                 </div>
             </div>
@@ -104,6 +104,9 @@
 </script>
 
 <script>
+	
+		
+	
     layui.use(['laypage', 'layer', 'table', 'element','form','laydate'], function(){
         var $ = layui.jquery
             , laypage = layui.laypage //分页
@@ -112,61 +115,46 @@
             ,element = layui.element //元素操作
             ,form = layui.form
             ,laydate = layui.laydate;
-            
-            
-             //日期时间选择器
-             //常规用法
-			  laydate.render({
-			    elem: '#test1'
 
-			  });
-			  
-			  //限定可选日期 开始时间
-			  var ins22 = laydate.render({
-			    elem: '#test-limit1'
-			    ,min: 'new Date()'
+            //日期时间选择器
+            //常规用法
+            laydate.render({
+                elem: '#test1'
+
+            });
+
+            //日期时间选择器
+			 var ins22 = laydate.render({
+			    elem: '#smBeginTime'
+			    ,type: 'datetime'
+			    ,min:'new Date()'
 			    ,max: '2021-10-14'
+			    ,format:'yyyy-MM-dd HH:mm'
 			    ,ready: function(){
 			      ins22.hint('日期可选值设定在 :<br> 今日 到 2021-10-14');
-			    }
+		    }
 			  });
 			  
-			  var ins23 = laydate.render({
-			    elem: '#test-limit2'
-			    ,min: 'new Date()'
+			 var ins23 = laydate.render({
+			    elem: '#smEndTime'
+			    ,type: 'datetime'
+			    ,min:'new Date()'
 			    ,max: '2021-10-14'
+			    ,format:'yyyy-MM-dd HH:mm'
 			    ,ready: function(){
 			      ins23.hint('日期可选值设定在 :<br> 今日 到 2021-10-14');
-			    }
-			  });
-			  
-			  //限定可选时间
-			  laydate.render({
-			    elem: '#test-limit3'
-			    ,type: 'time'
-			    ,format: 'HH:mm'
-			    ,min: '08:00:00'
-			    ,max: '15:30:00'
-			    ,btns: ['clear', 'confirm']
-			  });
-			  
-			  laydate.render({
-			    elem: '#test-limit4'
-			    ,type: 'time'
-			    ,format: 'HH:mm'
-			    ,min: '10:30:00'
-			    ,max: '17:30:00'
-			    ,btns: ['clear', 'confirm']
+		    }
 			  });
 
         selectSubjectName();
-//      selectCourse();
+        selectSessionMenu();
+
 
         //执行一个 table 实例
         var _thisTable =  table.render({
             elem: '#demo'
             ,height: 420
-            ,url: 'http://127.0.0.1:8080/examsys/smList.do' //数据接口
+            ,url: 'smList.do' //数据接口
             ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，
             ,title: '视频表'
             ,page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
@@ -205,12 +193,14 @@
                 layer.open({
                     type: 1
                     ,title: '添加考试场次'
-                    ,area: ['600px', '450px']
+                    ,area: ['580px', '350px']
                     ,shade: 0
                     ,maxmin: true
                     ,content:$("#add-main")
-
+					,
+			
                 });
+
             },
 
             //筛选重载
@@ -260,7 +250,7 @@
                 layer.confirm('确定删除所选的'+l +'个选项吗？', function (index) {
                     $.ajax({
                         type: 'post',
-                        url: "http://127.0.0.1:8080/examsys/deletesm.do",
+                        url: "deletesm.do",
                         data: {"smids":smids},
                         dataType: 'json',
                         success: function (data) {
@@ -270,7 +260,7 @@
                                 //当前所在的页码
                                 if (totalPageNum == currPage && (pageInfo == l||lastNum == l))  {
                                     table.reload('videoTable',{page:{curr:currPage - 1}})
-
+									$("#checkedNum").html(0);
                                 }  else{
                                     $(".layui-laypage-btn").click()
                                 }
@@ -302,18 +292,21 @@
         });
 
 
-        form.on('submit(save)',function (data) {
+        form.on('submit(save)',function (data) { 
             $.ajax({
                 type:"post",
-                url:"http://127.0.0.1:8080/examsys/addSessionMange.do",
+                url:"addSessionMange.do",
                 data:data.field,
                 dataType:"json",
                 success:function(data){
                     if(data.code == 0){
+                    	
                         layer.msg("添加考试信息成功")
                         table.reload('videoTable',{page:{curr:1}})
+                        
                        layer.closeAll('page');
-
+                       //设置标签值为空
+						$("#add-main input").val("");
                     }else{
                         layer.msg("添加考试信息失败")
                     }
@@ -321,9 +314,15 @@
                 error:function () {
                     layer.msg("ajax出错")  ;
                 }
-            })
+            });
+            
+            
         })
 
+//		$.ajax({
+//          	if($("#smBeginTime").val()>$("#smEndTime").val()){
+//          		layer.msg("结束时间不能小于开始时间")
+//          });
 
         //监听行工具事件
         table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
@@ -334,7 +333,7 @@
                 layer.confirm('真的删除该行么', function(index){
                     $.ajax({
                         type:'post',
-                        url:'http://127.0.0.1:8080/examsys/deletesmone.do',
+                        url:'deletesmone.do',
                         data:{'smid':rowData.smid},//向服务端发送删除的id
                         dataType:"json",
                         success:function(data){
@@ -354,12 +353,12 @@
             } else if(layEvent === 'edit'){
                 layer.open({
                     type: 2,
-                    area:['600px', '550px'],
+                    area:['580px', '350px'],
                     title: "更改信息",
                     fixed: false, //不固定
                     maxmin: true,
                     maxmin: false,
-                    content:'http://127.0.0.1:8020/examsys/modifysm.html?id=' + rowData.id
+                    content:'modifysm.html?smid=' + rowData.smid
                 });
             }
         });
@@ -367,7 +366,7 @@
         function selectSubjectName() {
             $.ajax({
                 type:"post",
-                url:"http://127.0.0.1:8080/examsys/subjectlist.do",
+                url:"subjectlist.do",
                 dataType:"json",
                 success:function(data){
                     var list = data.info;    //返回的数据
@@ -379,26 +378,94 @@
                     form.render("select");
                 }
             });
-        }
 
-        function selectCourse() {
+        }
+			
+	
+
+        function selectSessionMenu() {
             $.ajax({
                 type:"post",
-                url:"video/selectCourse.do",
+                url:"findAllTestPaper.do",
                 dataType:"json",
                 success:function(data){
-                    var list = data.info;    //返回的数据
-                    var course =  $(".course");
-                    for(var i=0;i<list.length;i++){
-                        var option = $("<option value ="+list[i].id+">"+list[i].course_title+"</option>");
-                        course.append(option)                           // 给select 添加option子标签
-                    }
-                    form.render("select");
+                   var list=data.info;
+				   var tpid = $(".tpid")
+				   for(var i=0;i<list.length;i++){
+				   	var option = $("<option value ="+list[i].tpid+">"+list[i].tptitle+"</option>>");
+                        tpid.append(option)
+				   }
+         								
+         	form.render("select");
                 }
             });
         }
+        
+        
+         var regIsCommitOldPass=false;
+       var regIsCommitPsw=false;
+       
+       $(function(){
+          
+          
+          $("#smEndTime").blur(function(){
+               var pass01= $("#smBeginTime").val();
+                var pass02= $("#smEndTime").val();
+                if(null==pass01 || ""==pass01 || null==pass02 || ""==pass02){
+                    $("#passMsg").text("时间不能为空").css("color","red");
+                    regIsCommitPsw =false;
+                }else{
+                    if(pass01>pass02){
+                        regIsCommitPsw=false;
+                        $("#passMsg").text("结束时间不能小于开始时间").css("color","red");
+                    }else{
+                        regIsCommitPsw=true;
+                        $("#passMsg").text("");
+                    }
+                }
+                
+          });
+          
+       
+       });
 
     });
+    
+    
 </script>
+
+	<script type="text/javascript">
+       
+       var regIsCommitOldPass=false;
+       var regIsCommitPsw=false;
+       
+       $(function(){
+          
+          
+          $("#smEndTime").blur(function(){
+               var pass01= $("#smBeginTime").val();
+                var pass02= $("#smEndTime").val();
+                if(null==pass01 || ""==pass01 || null==pass02 || ""==pass02){
+                    $("#passMsg").text("时间不能为空").css("color","red");
+                    regIsCommitPsw =false;
+                }else{
+                    if(pass01>pass02){
+                        regIsCommitPsw=false;
+                        $("#passMsg").text("结束时间不能小于开始时间").css("color","red");
+                    }else{
+                        regIsCommitPsw=true;
+                        $("#passMsg").text("");
+                    }
+                }
+                
+          });
+          
+       
+       });
+       
+    </script>
+
+	
+
 	</body>
 </html>
