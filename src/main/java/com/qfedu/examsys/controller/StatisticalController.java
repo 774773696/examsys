@@ -27,12 +27,12 @@ public class StatisticalController {
         //所有学科
         List<String> subjectList = statisticalService.findAllSubject();
         //该阶段参与考试的学科
-        List<String> subjects=statisticalService.findSubject("第一阶段考试");
+        List<String> subjects=statisticalService.findSubject("第一阶段");
         //各学科平均分
         List<Double> averageScores = new ArrayList<>();
         DecimalFormat df=new DecimalFormat(".00");
         for(String s:subjects){
-            Double averageScore=statisticalService.averageScore(s,"第一阶段考试");
+            Double averageScore=statisticalService.averageScore(s,"第一阶段");
             if(averageScore.isNaN()){
                 averageScore=0.00;
             }

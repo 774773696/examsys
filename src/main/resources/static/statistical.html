@@ -11,6 +11,23 @@
 </head>
 <body>
 
+<style type="text/css">
+
+    #form{
+        position: absolute;
+        left: 250px;
+        top: 100px;
+    }
+
+    #main{
+        position: absolute;
+        left: 200px;
+        top: 200px;
+    }
+
+</style>
+
+
 <script>
 
     layui.use(['form', 'layer', 'laydate'], function(){
@@ -134,7 +151,7 @@
 </script>
 
 
-<form class="layui-form" action="">
+<form class="layui-form" action="" id="form">
     <label class="layui-from-label1">阶段:</label>
     <div class="layui-input-inline">
         <select name="stage" id="select1" lay-verify="" lay-filter="select1">
@@ -151,7 +168,7 @@
 
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-<div id="main" style="width:600px;height:400px;"></div>
+<div id="main" style="width:700px;height:500px;"></div>
 
 <script type="text/javascript">
 
