@@ -1,10 +1,8 @@
 package com.qfedu.examsys.controller;
 
 import com.github.pagehelper.Page;
-import com.qfedu.examsys.pojo.EAnswerquestions;
-import com.qfedu.examsys.pojo.EMulquestions;
-import com.qfedu.examsys.pojo.ESinglequestions;
-import com.qfedu.examsys.pojo.EYnquestions;
+import com.qfedu.examsys.common.JsonBean;
+import com.qfedu.examsys.pojo.*;
 import com.qfedu.examsys.service.TestPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.jar.JarEntry;
 
 @RestController
 public class TestPaperController {
@@ -79,5 +78,20 @@ public class TestPaperController {
         map.put("data", list);
 
         return map;
+    }
+
+    @RequestMapping("/findtestpaperbyid.do")
+    public JsonBean findtestPaperBySubjectId(Integer subjectId){
+        List<ETestpaper> tpList = testPaperService.findtestPaperBySubjectId(subjectId);
+        return new JsonBean(0, tpList);
+    }
+
+    @RequestMapping("/findAllTestPaper.do")
+    public JsonBean findAllTestPaper() {
+        List<ETestpaper> eTestpaperList = testPaperService.findAllTestPaper();
+        if (eTestpaperList == null) {
+            throw new RuntimeException("没有试卷，请生成");
+        }
+        return new JsonBean(0, eTestpaperList);
     }
 }

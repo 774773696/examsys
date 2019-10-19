@@ -26,4 +26,10 @@ public interface TestPaperService {
      * @return
      */
     public List<ETestpaper> findtestPaperBySubjectId(Integer subjectId);
+
+    /**
+     * 查询所有试卷
+     * @return
+     */
+    public List<ETestpaper> findAllTestPaper();
 }

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.qfedu.examsys.dao.ESessionMangeDao;
 import com.qfedu.examsys.dao.SubjectDao;
 import com.qfedu.examsys.dao.TestPaperDao;
+import com.qfedu.examsys.pojo.ESessionMange;
 import com.qfedu.examsys.pojo.ESubject;
 import com.qfedu.examsys.pojo.ETestpaper;
 import com.qfedu.examsys.service.ESessionMangeService;
@@ -58,13 +59,13 @@ public class ESessionMangeServiceImpl implements ESessionMangeService {
     }
 
     @Override
-    public void modifySessionMange(ESmVo eSmVo) {
-        eSessionMangeDao.modifySessionMange(eSmVo);
+    public void modifySessionMange(ESessionMange eSessionMange) {
+            eSessionMangeDao.modifySessionMange(eSessionMange);
     }
 
     @Override
-    public void addSessionMange(ESmVo eSmVo) {
-        eSessionMangeDao.addSessionMange(eSmVo);
+    public void addSessionMange(ESessionMange eSessionMange) {
+        eSessionMangeDao.addSessionMange(eSessionMange);
     }
 
     @Override

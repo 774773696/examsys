@@ -1,5 +1,6 @@
 package com.qfedu.examsys.service;
 
+import com.qfedu.examsys.pojo.ESessionMange;
 import com.qfedu.examsys.vo.ESmVo;
 
 import java.util.Date;
@@ -21,9 +22,9 @@ public interface ESessionMangeService {
 
     public void deleteSessionMangeById(Integer smid);
 
-    public void modifySessionMange(ESmVo eSmVo);
+    public void modifySessionMange(ESessionMange eSessionMange);
 
-    public void addSessionMange(ESmVo eSmVo);
+    public void addSessionMange(ESessionMange eSessionMange);
 
     /**
      * 添加场次信息时选择科目联动菜单的实现

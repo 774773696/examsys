@@ -2,6 +2,7 @@ package com.qfedu.examsys.dao;
 
 
 
+import com.qfedu.examsys.pojo.ESessionMange;
 import com.qfedu.examsys.vo.ESmVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -48,14 +49,14 @@ public interface ESessionMangeDao {
 
     /**
      * 修改对应考试场次
-     * @param eSmVo
+     * @param eSessionMange
      */
-    public void modifySessionMange(ESmVo eSmVo);
+    public void modifySessionMange(ESessionMange eSessionMange);
 
     /**
      * 添加考试场次
-     * @param eSmVo
+     * @param eSessionMange
      */
-    public void addSessionMange(ESmVo eSmVo);
+    public void addSessionMange(ESessionMange eSessionMange);
 
 }

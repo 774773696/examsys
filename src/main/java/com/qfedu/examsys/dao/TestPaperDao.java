@@ -12,5 +12,10 @@ public interface TestPaperDao {
      */
     public List<ETestpaper> findAllTestPaper();
 
+    /**
+     * 根据科目id查询试卷的方法
+     * @param subjectId
+     * @return
+     */
     public List<ETestpaper> findtestPaperBySubjectId(Integer subjectId);
 }
