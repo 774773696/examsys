@@ -1,4 +1,4 @@
-package com.qfedu.examsys.dao;
+package com.qfedu.examsys.service;
 
 import com.qfedu.examsys.pojo.EAdmin;
 import com.qfedu.examsys.pojo.EPermission;
@@ -6,10 +6,13 @@ import com.qfedu.examsys.pojo.MenuInfo;
 
 import java.util.List;
 
-public interface AdminDao{
+public interface AdminService {
 
-    //根据名字查询管理员
-    public EAdmin findByAdminName(String name);
+    // Admin用户注册
+    public void register(EAdmin admin);
+
+    // Admin用户登录
+    public EAdmin login(String name);
 
 
     // 根据id获取菜单信息
@@ -20,12 +23,9 @@ public interface AdminDao{
     public List<String> findPermsByName(String name);
 
 
-    //添加admin用户
-    public void addAdmin(EAdmin admin);
-
-
     //模糊查询遍历所有权限
-    public List<EPermission> findAllPerm(String pname);
+    public List<EPermission> findAllPerm(String pname,Integer page, Integer limit);
+
 
     //增加权限信息
     public void add(EPermission ePermission);
@@ -36,6 +36,4 @@ public interface AdminDao{
     //修改权限信息
     public void update(EPermission ePermission);
 
-    //根据权限id查找权限
-    public EPermission findByPermId(Integer pid);
 }
