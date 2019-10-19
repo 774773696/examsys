@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script type="text/javascript" src="/js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css" />
+    <script type="text/javascript" src="layui/layui.js" ></script>
+</head>
+<body>
+
+<script>
+
+    layui.use(['form', 'layer', 'laydate'], function(){
+        var form = layui.form;
+        var layer = layui.layer;
+        var laydate = layui.laydate;
+        var $ = layui.jquery;
+
+        //页面一加载就发送ajax
+        $(function(){
+            $.ajax({
+                url: "statisticalPage",
+                type: "POST",
+                datType: "json",
+                success: function(data){
+                    for(i=0;i<data.stageList.length;i++){
+                        var html1 = "<option value=\""  + data.stageList[i] + "\">" +data.stageList[i] + "</option>";
+                        $("#select1").append(html1);
+                    }
+                    for(i=0;i<data.subjectList.length;i++){
+                        var html2 = "<option value=\""  + data.subjectList[i] + "\">" +data.subjectList[i] + "</option>";
+                        $("#select2").append(html2);
+                    }
+                    form.render("select");
+                    myChart.setOption({
+                        xAxis: {
+                            data: data.subjects,
+                        },
+                        series: [{
+                            // 根据名字对应到相应的系列
+                            name: '平均成绩',
+                            data: data.averageScores,
+                        }]
+                    });
+                },
+                error:function () {
+                    alert("error");
+                }
+            });
+        })
+    });
+</script>
+
+
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        var $ = layui.jquery;
+        //监听提交
+        form.on('select(select1)', function(data){
+            var stage=data.value;
+            if(stage!=null&&stage!=""){
+                $.ajax({
+                    url: "statisticalStage",
+                    type: "POST",
+                    data:{"stage":stage},
+                    datType: "json",
+                    success: function(data){
+                        myChart.setOption({
+                            xAxis: {
+                                data: data.subjects,
+                            },
+                            series: [{
+                                // 根据名字对应到相应的系列
+                                name: '平均成绩',
+                                data: data.averageScores,
+                            }]
+                        });
+                    },
+                    error:function () {
+                        alert("error");
+                    }
+                });
+            }
+
+            return false;
+        });
+    });
+</script>
+
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        var $ = layui.jquery;
+        //监听提交
+        form.on('select(select2)', function(data){
+            var subject=data.value;
+            if(subject!=null&&subject!=""){
+                $.ajax({
+                    url: "statisticalSubject",
+                    type: "POST",
+                    data:{"subject":subject},
+                    datType: "json",
+                    success: function(data){
+                        myChart.setOption({
+                            xAxis: {
+                                data: data.stages,
+                            },
+                            series: [{
+                                // 根据名字对应到相应的系列
+                                name: '平均成绩',
+                                data: data.averageScores,
+                            }]
+                        });
+                    },
+                    error:function () {
+                        alert("error");
+                    }
+                });
+            }
+
+            return false;
+        });
+    });
+</script>
+
+
+<form class="layui-form" action="">
+    <label class="layui-from-label1">阶段:</label>
+    <div class="layui-input-inline">
+        <select name="stage" id="select1" lay-verify="" lay-filter="select1">
+            <option value="">请选择阶段</option>
+        </select>
+    </div>
+    <label class="layui-form-label2">学科:</label>
+    <div class="layui-input-inline">
+        <select name="subject" id="select2" lay-verify="" lay-filter="select2">
+            <option value="">请选择学科</option>
+        </select>
+    </div>
+</form>
+
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width:600px;height:400px;"></div>
+
+<script type="text/javascript">
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [{
+            type: 'category',
+            data: [],
+            axisTick: {
+                alignWithLabel: true
+            }
+        }],
+        yAxis: [{
+            type: 'value'
+        }],
+        series: [{
+            name: '平均成绩',
+            type: 'bar',
+            barWidth: '30%',
+            data: [],
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: true, //开启显示
+                        position: 'top', //在上方显示
+                        textStyle: { //数值样式
+                            color: 'black',
+                            fontSize: 10
+                        }
+                    }
+                }
+            },
+
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+</body>
+</html>
