@@ -6,6 +6,8 @@ import java.util.List;
 
 //科目
 public interface SubjectDao {
-    //查询所有的科目
+    /**
+     *查询所有的科目
+     */
     public List<ESubject> findAllSubject();
 }

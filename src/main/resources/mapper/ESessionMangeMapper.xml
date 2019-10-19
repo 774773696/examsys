@@ -14,8 +14,8 @@
             <if test="tpTitle != null and tpTitle != ''">
                 and et.tpTitle like CONCAT('%','${tpTitle}','%')
             </if>
-            <if test="smBeginTime != null and smBeginTime !=''">
-                DATE_FORMAT(createTime,'%Y-%m-%d') = DATE_FORMAT(#{beginTime},'%Y-%m-%d')
+            <if test="smBeginTime != null">
+                and DATE_FORMAT(smBeginTime,'%Y-%m-%d') >= DATE_FORMAT(#{smBeginTime},'%Y-%m-%d')
             </if>
             <if test="subjectName != null and subjectName != ''">
                 and es.subjectName=#{subjectName}
@@ -29,33 +29,33 @@
     </select>
 
     <delete id="deleteSessionMange" parameterType="int">
-        delete from e_sessionmange where smid in
-        <foreach collection="array" item="smid" open="(" close= ")" separator=",">
-            #{smids}
-        </foreach>
-    </delete>
+    delete from e_sessionmange where smid in
+    <foreach collection="array" item="smid" open="(" close= ")" separator=",">
+        #{smid}
+    </foreach>
+</delete>
 
     <delete id="deleteSessionMangeById" parameterType="integer">
         delete from e_sessionmange where smid=#{smid}
     </delete>
 
-    <update id="modifySessionMange" parameterType="com.qfedu.examsys.vo.ESmVo">
+    <update id="modifySessionMange" parameterType="com.qfedu.examsys.pojo.ESessionMange">
         update e_sessionmange
         <set>
-            <if test="tpId != null and tpId != ''">
-                tpId = #{tpId},
+            <if test="tpid != null and tpid != ''">
+                tpId=#{tpid},
             </if>
-            <if test="smBeginTime != null and smBeginTime != ''">
-                smBeginTime = #{smBeginTime}
+            <if test="smBeginTime != null">
+                smBeginTime=#{smBeginTime},
             </if>
-            <if test="smEndTime != null and smEndTime != ''">
-                smEndTime = #{smEndTime}
+            <if test="smEndTime != null">
+                smEndTime=#{smEndTime},
             </if>
         </set>
         where smid=#{smid}
     </update>
 
-    <insert id="addSessionMange" parameterType="com.qfedu.examsys.vo.ESmVo">
-        inner into e_sessionmange(tpId,smBeginTime,smEndTime) values(#{tpId},#{smBeginTime},#{smEndTime})
+    <insert id="addSessionMange" parameterType="com.qfedu.examsys.pojo.ESessionMange">
+        insert into e_sessionmange(tpId,smBeginTime,smEndTime) values(#{tpid},#{smBeginTime},#{smEndTime})
     </insert>
 </mapper>

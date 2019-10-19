@@ -1,18 +1,18 @@
 package com.qfedu.examsys.pojo;
 
 public class EAnswerquestions {
-    private Integer aqid;
+    private int aqId;
 
     private String atitle;
 
     private String aanswer;
 
-    public Integer getAqid() {
-        return aqid;
+    public Integer getAqId() {
+        return aqId;
     }
 
-    public void setAqid(Integer aqid) {
-        this.aqid = aqid;
+    public void setAqId(Integer aqId) {
+        this.aqId = aqId;
     }
 
     public String getAtitle() {

@@ -13,8 +13,8 @@ import java.util.Date;
  */
 @Data
 public class ESessionMange implements Serializable {
-    private Integer smId; //场次id
-    private Integer tpId; // 试卷id
+    private Integer smid; //场次id
+    private Integer tpid; // 试卷id
     private Date smBeginTime; //场次开始时间
     private Date smEndTime; // 场次结束时间
 }
