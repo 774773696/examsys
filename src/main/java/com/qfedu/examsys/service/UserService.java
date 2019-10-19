@@ -53,5 +53,11 @@ public interface UserService {
      */
     void update(EUser eUser);
 
+    /**
+     * 获取到所有的专业
+     * @return
+     */
+    List<String> findAllProfession();
+
     List<EUser> findByCondition(String unumber, String uname, String uprofession, Integer page, Integer limit);
 }

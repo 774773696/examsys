@@ -80,6 +80,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<String> findAllProfession() {
+        return userDao.findAllProfession();
+    }
+
+    @Override
     public List<EUser> findByCondition(String unumber, String uname, String uprofession, Integer page, Integer limit) {
 
         PageHelper.startPage(page, limit);

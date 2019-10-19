@@ -2,13 +2,14 @@ package com.qfedu.examsys.controller;
 
 import com.github.pagehelper.Page;
 import com.qfedu.examsys.common.JsonBean;
+import com.qfedu.examsys.dao.TestPaperDao;
+import com.qfedu.examsys.pojo.ESessionMange;
+import com.qfedu.examsys.pojo.ETestpaper;
 import com.qfedu.examsys.service.ESessionMangeService;
 import com.qfedu.examsys.vo.ESmVo;
+import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -28,10 +29,14 @@ public class ESessionMangeController {
     @Autowired
     private ESessionMangeService eSessionMangeService;
 
+    @Autowired(required = false)
+    private TestPaperDao testPaperDao;
+
     @RequestMapping("/smList.do")
     public Map<String, Object> findAllSessionMange(Integer page, Integer limit, String tpTitle, Date smBeginTime, String subjectName) {
         List<ESmVo> list = eSessionMangeService.findAllSessionMangeByPage(page, limit,tpTitle, smBeginTime,subjectName);
         long total = ((Page) list).getTotal();
+
 
         Map<String, Object> map = new HashMap<>();
         map.put("code", 0);
@@ -40,6 +45,15 @@ public class ESessionMangeController {
         map.put("data", list);
 
         return map;
+
+
+    }
+
+    @RequestMapping("findsmone.do")
+    public JsonBean findSessionmangeById(Integer smid) {
+
+        ESmVo eSmVo = eSessionMangeService.findSessionMangeById(smid);
+        return new JsonBean(0, eSmVo);
     }
 
     @RequestMapping("/deletesm.do")
@@ -56,21 +70,28 @@ public class ESessionMangeController {
     }
 
     @RequestMapping("/modifySessionMange.do")
-    public JsonBean modifySessionMange(Integer smid) {
-            if (smid == null) {
-                return new JsonBean(1, "考试场次不存在");
-            }
-        ESmVo mange = eSessionMangeService.findSessionMangeById(smid);
-            if (mange != null) {
-                eSessionMangeService.modifySessionMange(mange);
-    }
+    public JsonBean modifySessionMange(ESessionMange eSessionMange) {
+
+           eSessionMangeService.modifySessionMange(eSessionMange);
         return new JsonBean(0, "修改成功");
     }
 
     @RequestMapping("/addSessionMange.do")
-    public JsonBean addSessionMange(ESmVo eSmVo) {
-        // 此处需要添加试卷的查询方法，先查询再进行考试场次管理里进行添加
-        eSessionMangeService.addSessionMange(eSmVo);
+    public JsonBean addSessionMange(ESessionMange eSessionMange) {
+
+        eSessionMangeService.addSessionMange(eSessionMange);
         return new JsonBean(0, null);
+    }
+
+    /**
+     * 添加场次时显示科目的二级联动菜单
+     */
+    @RequestMapping("/subjectmenu.do")
+    public JsonBean findSubjectMenu() {
+        List<Map<String, Object>> list = eSessionMangeService.groupSessionType();
+        Map<String, Object> map = new HashMap<>();
+        map.put("group", list);
+        return new JsonBean(0, map);
+
     }
 }

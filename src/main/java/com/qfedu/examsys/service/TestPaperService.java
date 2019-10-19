@@ -19,4 +19,17 @@ public interface TestPaperService {
     public List<EMulquestions> findAllMulquestions(Integer page, Integer limit);
     //查询所有的简答题目
     public List<EAnswerquestions> findAllAnswerquestions(Integer page, Integer limit);
+
+    /**
+     * 通过科目id查询对应的试卷
+     * @param subjectId
+     * @return
+     */
+    public List<ETestpaper> findtestPaperBySubjectId(Integer subjectId);
+
+    /**
+     * 查询所有试卷
+     * @return
+     */
+    public List<ETestpaper> findAllTestPaper();
 }

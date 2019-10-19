@@ -39,23 +39,23 @@
         delete from e_sessionmange where smid=#{smid}
     </delete>
 
-    <update id="modifySessionMange" parameterType="com.qfedu.examsys.vo.ESmVo">
+    <update id="modifySessionMange" parameterType="com.qfedu.examsys.pojo.ESessionMange">
         update e_sessionmange
         <set>
-            <if test="tpId != null and tpId != ''">
-                tpId = #{tpId},
+            <if test="tpid != null and tpid != ''">
+                tpId=#{tpid},
             </if>
-            <if test="smBeginTime != null and smBeginTime != ''">
-                smBeginTime = #{smBeginTime}
+            <if test="smBeginTime != null">
+                smBeginTime=#{smBeginTime},
             </if>
-            <if test="smEndTime != null and smEndTime != ''">
-                smEndTime = #{smEndTime}
+            <if test="smEndTime != null">
+                smEndTime=#{smEndTime},
             </if>
         </set>
         where smid=#{smid}
     </update>
 
-    <insert id="addSessionMange" parameterType="com.qfedu.examsys.vo.ESmVo">
-        inner into e_sessionmange(tpId,smBeginTime,smEndTime) values(#{tpId},#{smBeginTime},#{smEndTime})
+    <insert id="addSessionMange" parameterType="com.qfedu.examsys.pojo.ESessionMange">
+        insert into e_sessionmange(tpId,smBeginTime,smEndTime) values(#{tpid},#{smBeginTime},#{smEndTime})
     </insert>
 </mapper>

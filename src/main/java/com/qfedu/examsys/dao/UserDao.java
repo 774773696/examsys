@@ -63,6 +63,12 @@ public interface UserDao {
     void update(EUser eUser);
 
     /**
+     * 获取到所有的专业
+     * @return
+     */
+    List<String> findAllProfession();
+
+    /**
      * 多条件查询
      * @param unumber
      *      用户编号

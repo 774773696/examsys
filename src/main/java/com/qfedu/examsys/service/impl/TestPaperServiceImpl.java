@@ -26,11 +26,18 @@ public class TestPaperServiceImpl implements TestPaperService {
     @Autowired(required = false)
     private AnswerquestionsDao answerquestionsDao;
 
+    @Autowired(required = false)
+    private TestPaperDao testPaperDao;
+
 
     //查询所有的科目
     @Override
     public List<ESubject> findAllSubject() {
-        return subjectDao.findAllSubject();
+        List<ESubject> eSubjects = subjectDao.findAllSubject();
+        if (eSubjects.isEmpty()) {
+            throw new RuntimeException("没有此科目，完善科目");
+        }
+        return eSubjects;
     }
 
     //查询所有的单选题目
@@ -60,6 +67,16 @@ public class TestPaperServiceImpl implements TestPaperService {
     public List<EAnswerquestions> findAllAnswerquestions(Integer page, Integer limit) {
         PageHelper.startPage(page,limit);
         return answerquestionsDao.findAllAnswerquestions();
+    }
+
+    @Override
+    public List<ETestpaper> findtestPaperBySubjectId(Integer subjectId) {
+        return testPaperDao.findtestPaperBySubjectId(subjectId);
+    }
+
+    @Override
+    public List<ETestpaper> findAllTestPaper() {
+        return testPaperDao.findAllTestPaper();
     }
 
     @Override
