@@ -2,6 +2,7 @@ package com.qfedu.examsys.realm;
 
 import com.qfedu.examsys.pojo.EAdmin;
 import com.qfedu.examsys.service.AdminService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -73,7 +74,7 @@ public class MyRealm extends AuthorizingRealm {
 
             //如果md5中使用盐值，需要在认证信息对象设置盐值
             info = new SimpleAuthenticationInfo(name,admin.getApassword(),ByteSource.Util.bytes("haha"),this.getName());
-
+            SecurityUtils.getSubject().getSession().setTimeout(-1000L);
         }
 
 
