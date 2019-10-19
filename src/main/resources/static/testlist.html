@@ -44,60 +44,22 @@
     </div>
 	<div class="layui-tab">
 	  <ul class="layui-tab-title">
-	    <li class="layui-this">网站设置</li>
-	    <li>单选题</li>
+	    <li class="layui-this">单选题</li>
 	    <li>多选题</li>
 	    <li>简答题</li>
 	    <li>判断</li>
 	  </ul>
 	  <div class="layui-tab-content">
 	    <div class="layui-tab-item layui-show">
-	      1. 高度默认自适应，也可以随意固宽。
-	      <br>2. Tab进行了响应式处理，所以无需担心数量多少。
-	    </div>
-	    <div class="layui-tab-item">
-			<div class="layui-form searchDiv">
-			    <div class="layui-form-item">
-			        <div class="layui-inline" style="margin-left: 20px">
-			            <div class="layui-btn-group demoTable">
-			                <button type="button" class="layui-btn" data-method="setTop"> <i class="layui-icon">&#xe608;</i> 添加</button>
-			                <button class="layui-btn"  data-type="getCheckData" >批量删除<span class="layui-badge " id="checkedNum">0</span></button>
-			            </div>
-			        </div>
-					<div class="layui-inline" style="margin-left: 20px">
-					    <div class="layui-btn-group demoTable">
-					       <button type="button" class="layui-btn" id="test3">
-					           <i class="layui-icon"></i>导入Excel文件
-					       </button>
-						</div>
-					</div>
-					
-			
-			        <div class="layui-inline" style="float: right">                
-			            <div class="layui-input-inline">
-			                <select name="course" id="course" class="course">
-			                    <option value="">请选择科目</option>
-			                </select>
-			            </div>
-			            <button type="button" class="layui-btn" id="search" data-type="reload" style="margin-bottom: 5px">搜索</button>
-			        </div>
-			    </div>
-			</div>
-			内容2
 		<table class="layui-hide" id="SingDemo" lay-filter="test" lay-skin="nob"></table>
 		</div>
 	    <div class="layui-tab-item">
-			
-			内容3
-		
 		<table class="layui-hide" id="mulDemo" lay-filter="test" lay-skin="nob"></table>
 		</div>
-	    <div class="layui-tab-item">内容4
-		
+	    <div class="layui-tab-item">
 		<table class="layui-hide" id="anDemo" lay-filter="test" lay-skin="nob"></table>
 		</div>
-	    <div class="layui-tab-item">内容5
-		
+	    <div class="layui-tab-item">
 		<table class="layui-hide" id="YnDemo" lay-filter="test" lay-skin="nob"></table>
 		</div>
 	  </div>
@@ -146,14 +108,6 @@
 			        </select>
 			    </div>
 			</div>
-            <div class="layui-form-item">
-                <label class="layui-form-label" style="width: 90px">所属科目</label>
-                <div class="layui-input-inline" style="width: 240px">
-                    <select id="course_id" name="course_id" class="course"  lay-verify="required">
-                        <option value="">请选择科目</option>
-                    </select>
-                </div>
-            </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="save" >提交</button>
@@ -451,7 +405,7 @@
         form.on('submit(save)',function (data) {
             $.ajax({
                 type:"post",
-                url:"video/addVideo.do",
+                url:"addsingle.do",
                 data:data.field,
                 dataType:"json",
                 success:function(data){
@@ -459,7 +413,10 @@
                         layer.msg("添加单选题成功")
                         table.reload('videoTable',{page:{curr:1}})
                        layer.closeAll('page');
-
+						setTimeout(function(){
+							//这里写时间到后执行的代码
+							window.location.reload();
+						}, 2000);
                     }else{
                         layer.msg("添加考试信息失败")
                     }

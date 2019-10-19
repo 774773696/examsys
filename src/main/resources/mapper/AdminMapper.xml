@@ -9,7 +9,7 @@
         <id property="menuId" column="pid"></id>
         <result property="menuName" column="pname"></result>
         <result property="url" column="url"></result>
-        <collection property="childMenu" javaType="list" ofType="com.qfedu.examsys.pojo.MenuInfo">
+        <collection property="childMenus" javaType="list" ofType="com.qfedu.examsys.pojo.MenuInfo">
             <id property="menuId" column="cid"></id>
             <result property="menuName" column="cname"></result>
             <result property="url" column="curl"></result>
@@ -22,18 +22,52 @@
     </select>
 
     <select id="findMenu" resultMap="menuMap">
-        select p.pid,p.pname,p.url,c.pid cid,c.pname cname,c.url curl from e_permission  p
-            inner join  e_permission c
-            on p.pid = c.parentId
-            inner join e_role_perm rp
-            on rp.pid = c.pid
-            inner join e_admin a
-            on a.rid = rp.rid
-            where c.type = 1 and a.aid = #{id}
+        select p.pid, p.pname,p.url, c.pid cid, c.pname cname,c.url curl
+        from e_permission p
+        inner join e_permission c on p.pid = c.parentId
+        inner join e_role_perm rp on p.pid = rp.pid
+        inner join e_admin a on rp.rid = a.rid
+        where a.aid = #{id}
     </select>
     
     
-    
+    <insert id="addAdmin">
+        insert into e_admin(aname,apassword,rid) VALUES(#{aname},#{apassword},2);
+    </insert>
+
+
+    <select id="findPermsByName" resultType="String">
+        select distinct p.pdesc from e_admin a
+        inner join e_role r
+        on a.rid = r.rid
+        inner join e_role_perm rp
+        on rp.rid = r.rid
+        inner join e_permission p
+        on p.pid = rp.pid
+        where a.aname = #{name} and p.pdesc != '' and p.pdesc is not null
+    </select>
+<!--    #{pname}-->
+    <select id="findAllPerm" resultType="com.qfedu.examsys.pojo.EPermission">
+        select * from e_permission
+        <where>
+            <if test="pname != null and pname != ''">
+                pname like  "%"'${value}'"%"
+            </if>
+        </where>
+    </select>
+
+    <insert id="add">
+       insert into e_permission(pid,pname,pdesc,type,url)
+        values(#{pid},#{pname},#{pdesc},#{type},#{url});
+    </insert>
+
+    <delete id="delete">
+       delete from e_permission where pid = #{pid}
+    </delete>
+
+    <update id="update">
+        update e_permission set pname = #{pname},pdesc = #{pdesc},type=#{type},url = #{url} where pid = #{pid}
+    </update>
 
 
 </mapper>
