@@ -11,7 +11,7 @@ dao层接口中的方法名和映射文件中增删改查配置的statement id�
 <mapper namespace="com.qfedu.examsys.dao.StatisticalDao">
 
     <select id="findAllStage" resultType="String">
-        select distinct tpTitle from e_testpaper;
+        select distinct stagename from e_testpaper;
     </select>
 
     <select id="findAllSubject" resultType="String">
@@ -19,31 +19,31 @@ dao层接口中的方法名和映射文件中增删改查配置的statement id�
     </select>
 
     <select id="findSubject" resultType="String">
-        SELECT e_subject.subjectName FROM e_testpaper,e_subject
+        SELECT e_subject.subjectName FROM e_subject,e_testpaper
         WHERE
-        e_testpaper.subjectId=e_subject.subjectId
+        e_subject.subjectId=e_testpaper.subjectId
         AND
-        e_testpaper.tpTitle=#{stage};
+        e_testpaper.stagename=#{stage};
     </select>
 
     <select id="findStage" resultType="String">
-        SELECT e_testpaper.tpTitle from e_testpaper,e_subject
+        SELECT e_testpaper.stagename from e_testpaper,e_subject
         WHERE
         e_testpaper.subjectId=e_subject.subjectId
         AND
-        subjectName=#{subject};
+        e_subject.subjectname=#{subject};
     </select>
 
     <select id="findAllUser" resultType="Integer">
-        SELECT COUNT(usid) FROM e_user_score,e_testpaper,e_subject
+        SELECT distinct COUNT(uid) FROM e_user_score,e_testpaper,e_subject
         WHERE
         e_user_score.tpId=e_testpaper.tpId
         AND
-        e_testpaper.subjectId=e_subject.subjectId
+        e_subject.subjectId=e_testpaper.subjectId
         AND
-        e_subject.subjectName=#{subject}
+        e_testpaper.stagename=#{stage}
         AND
-        e_testpaper.tpTitle=#{stage};
+        e_subject.subjectname=#{subject};
     </select>
 
     <select id="findAllScore" resultType="double">
@@ -53,9 +53,9 @@ dao层接口中的方法名和映射文件中增删改查配置的statement id�
         AND
         e_testpaper.subjectId=e_subject.subjectId
         AND
-        e_subject.subjectName=#{subject}
+        e_testpaper.stagename=#{stage}
         AND
-        e_testpaper.tpTitle=#{stage};
-    </select>
+        e_subject.subjectName=#{subject};
+        </select>
 
 </mapper>
