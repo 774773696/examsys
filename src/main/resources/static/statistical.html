@@ -64,6 +64,8 @@
         form.on('select(select1)', function(data){
             var stage=data.value;
             if(stage!=null&&stage!=""){
+                document.getElementById("option2").selected=true;
+                form.render("select");
                 $.ajax({
                     url: "statisticalStage",
                     type: "POST",
@@ -101,6 +103,8 @@
         form.on('select(select2)', function(data){
             var subject=data.value;
             if(subject!=null&&subject!=""){
+                document.getElementById("option1").selected=true;
+                form.render("select");
                 $.ajax({
                     url: "statisticalSubject",
                     type: "POST",
@@ -134,13 +138,13 @@
     <label class="layui-from-label1">阶段:</label>
     <div class="layui-input-inline">
         <select name="stage" id="select1" lay-verify="" lay-filter="select1">
-            <option value="">请选择阶段</option>
+            <option value="" id="option1">请选择阶段</option>
         </select>
     </div>
     <label class="layui-form-label2">学科:</label>
     <div class="layui-input-inline">
         <select name="subject" id="select2" lay-verify="" lay-filter="select2">
-            <option value="">请选择学科</option>
+            <option value="" id="option2">请选择学科</option>
         </select>
     </div>
 </form>
