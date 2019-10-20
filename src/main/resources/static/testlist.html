@@ -507,17 +507,30 @@
 		var upload = layui.upload;
 
 		//执行上传
-		var uploadInst = upload.render({
+		upload.render({
 			elem: '#test3' //绑定元素
-			,url: '../question/import' //上传接口
+			,url: 'uploadSingleQuestion.do' //上传接口
 			,method: 'POST'
 			,accept: 'file'
-			,before: function(obj){
-				layer.load();
-			}
+			//,before: function(obj){
+			//	layer.load();
+			//}
 			,done: function(data){
 			//上传完毕回调
-				layer.alert(data.info);
+
+				if (data.code == 0) {
+					layer.alert('上传成功', {
+						skin: 'layui-layer-molv' //样式类名  自定义样式
+						,closeBtn: 1    // 是否显示关闭按钮
+						,anim: 1 //动画类型
+						,btn: ['确定'] //按钮
+						,icon: 6    // icon
+					});
+                    setTimeout(function () {
+                        location.reload();
+                    },1500);
+				}
+					// location.reload();
 		}
 
 		});

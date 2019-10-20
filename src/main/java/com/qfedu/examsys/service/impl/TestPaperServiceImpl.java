@@ -1,13 +1,21 @@
 package com.qfedu.examsys.service.impl;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.qfedu.examsys.dao.*;
 import com.qfedu.examsys.pojo.*;
 import com.qfedu.examsys.service.TestPaperService;
+import com.qfedu.examsys.utils.ExcelUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class TestPaperServiceImpl implements TestPaperService {
 
@@ -82,5 +90,31 @@ public class TestPaperServiceImpl implements TestPaperService {
     @Override
     public void importSinglequestions() {
 
+    }
+
+    @Override
+    public void uploadSingleQuestion(MultipartFile file) {
+        try {
+            InputStream inputStream = file.getInputStream();
+
+            //文件名
+            String originalFilename = file.getOriginalFilename();
+
+            List<Map<String, Object>> list = ExcelUtils.readExcel(inputStream, originalFilename);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            //将List转成json格式数据
+            String jsonStr = objectMapper.writeValueAsString(list);
+            //将json格式数据转成指定对象
+            List<ESinglequestions> sqList = objectMapper.readValue(jsonStr, new TypeReference<List<ESinglequestions>>(){
+            });
+
+            System.out.println(sqList.get(0));
+            //将选择题对象集合存入数据库
+            testPaperDao.addSingleQuestions(sqList);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

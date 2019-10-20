@@ -6,7 +6,9 @@ import com.qfedu.examsys.pojo.*;
 import com.qfedu.examsys.service.TestPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -93,5 +95,20 @@ public class TestPaperController {
             throw new RuntimeException("没有试卷，请生成");
         }
         return new JsonBean(0, eTestpaperList);
+    }
+
+    @RequestMapping("/uploadSingleQuestion.do")
+    public Map<String, Object> uploadSingleQuestion(@RequestParam("file") MultipartFile file) {
+            HashMap<String, Object> map = new HashMap<>();
+        try {
+            testPaperService.uploadSingleQuestion(file);
+            map.put("code", 0);
+            map.put("info", "上传成功");
+            return map;
+        } catch (Exception e) {
+            map.put("code", 1);
+            map.put("info", "上传失败");
+            return map;
+        }
     }
 }
