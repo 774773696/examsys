@@ -52,13 +52,24 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/register.do", "anon");
 
         //perms访问资源，需要的权限
-        filterChainDefinitionMap.put("/testPaper.html","perms[role:list]");
+//        filterChainDefinitionMap.put("/testPaper.html","perms[role:list]");
 
 //
 //        filterChainDefinitionMap.put("/admin/**", "authc");
 //        filterChainDefinitionMap.put("/user/**", "authc");
         filterChainDefinitionMap.put("/index.html", "authc");
         filterChainDefinitionMap.put("/findMenu.do", "authc");
+        filterChainDefinitionMap.put("/add.html", "authc");
+        filterChainDefinitionMap.put("/candidateInfo.html", "authc");
+        filterChainDefinitionMap.put("/modifysm.html", "authc");
+        filterChainDefinitionMap.put("/noperms.html", "authc");
+        filterChainDefinitionMap.put("/permsList.html", "authc");
+        filterChainDefinitionMap.put("/SessionMangeList.html", "authc");
+        filterChainDefinitionMap.put("/statistical.html", "authc");
+        filterChainDefinitionMap.put("/testlist.html", "authc");
+        filterChainDefinitionMap.put("/testPaper.html", "authc");
+        filterChainDefinitionMap.put("/update.html", "authc");
+
 
 
         //退出时，指定logout过滤器
