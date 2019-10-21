@@ -1,6 +1,7 @@
 package com.qfedu.examsys.service;
 
 import com.qfedu.examsys.pojo.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ public interface TestPaperService {
      */
     public List<ETestpaper> findAllTestPaper();
 
+<<<<<<< HEAD
 
     public void delAnswerquestions(int aqId);
 
@@ -44,4 +46,7 @@ public interface TestPaperService {
 
 
 
+=======
+    public void uploadSingleQuestion(MultipartFile file);
+>>>>>>> 958b68ca135e5831a231c6000d435f73a9c207ee
 }

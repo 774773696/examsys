@@ -58,7 +58,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 90px">考试试卷</label>
                 <div class="layui-input-inline" style="width: 240px">
-                    <select id="tpid" name="tpid" class="tpid"  >
+                    <select id="tpid" name="tpid" class="tpid" lay-verify="required" >
                         <option value="">请选择试卷</option>
                     </select>
                 </div>
@@ -83,7 +83,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="save" >提交</button>
+                    <button class="layui-btn" lay-submit lay-filter="save" id="zcyz">提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -234,7 +234,7 @@
                     for (var i = 0; i < data.length; i++) {
                         smids += data[i].smid + ",";
                     }
-                    alert(smids)
+
                 }
 
                 //获取当前页码
@@ -319,10 +319,6 @@
             
         })
 
-//		$.ajax({
-//          	if($("#smBeginTime").val()>$("#smEndTime").val()){
-//          		layer.msg("结束时间不能小于开始时间")
-//          });
 
         //监听行工具事件
         table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
@@ -403,24 +399,29 @@
         
         
          var regIsCommitOldPass=false;
-       var regIsCommitPsw=false;
+        var regIsCommitPsw=false;
        
        $(function(){
-          
-          
+
           $("#smEndTime").blur(function(){
                var pass01= $("#smBeginTime").val();
                 var pass02= $("#smEndTime").val();
                 if(null==pass01 || ""==pass01 || null==pass02 || ""==pass02){
                     $("#passMsg").text("时间不能为空").css("color","red");
                     regIsCommitPsw =false;
+                    $("#zcyz").attr("disabled", true);
+
                 }else{
                     if(pass01>pass02){
                         regIsCommitPsw=false;
                         $("#passMsg").text("结束时间不能小于开始时间").css("color","red");
+                        $("#zcyz").attr("disabled", true);
+
+
                     }else{
                         regIsCommitPsw=true;
                         $("#passMsg").text("");
+                        $("#zcyz").attr("disabled", false);
                     }
                 }
                 
@@ -433,39 +434,6 @@
     
     
 </script>
-
-	<script type="text/javascript">
-       
-       var regIsCommitOldPass=false;
-       var regIsCommitPsw=false;
-       
-       $(function(){
-          
-          
-          $("#smEndTime").blur(function(){
-               var pass01= $("#smBeginTime").val();
-                var pass02= $("#smEndTime").val();
-                if(null==pass01 || ""==pass01 || null==pass02 || ""==pass02){
-                    $("#passMsg").text("时间不能为空").css("color","red");
-                    regIsCommitPsw =false;
-                }else{
-                    if(pass01>pass02){
-                        regIsCommitPsw=false;
-                        $("#passMsg").text("结束时间不能小于开始时间").css("color","red");
-                    }else{
-                        regIsCommitPsw=true;
-                        $("#passMsg").text("");
-                    }
-                }
-                
-          });
-          
-       
-       });
-       
-    </script>
-
-	
 
 	</body>
 </html>

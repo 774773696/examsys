@@ -157,6 +157,39 @@
             });
         }
 
+
+        var regIsCommitOldPass=false;
+        var regIsCommitPsw=false;
+
+        $(function(){
+
+            $("#smEndTime").blur(function(){
+                var pass01= $("#smBeginTime").val();
+                var pass02= $("#smEndTime").val();
+                if(null==pass01 || ""==pass01 || null==pass02 || ""==pass02){
+                    $("#passMsg").text("时间不能为空").css("color","red");
+                    regIsCommitPsw =false;
+                    $("#zcyz").attr("disabled", true);
+
+                }else{
+                    if(pass01>pass02){
+                        regIsCommitPsw=false;
+                        $("#passMsg").text("结束时间不能小于开始时间").css("color","red");
+                        $("#zcyz").attr("disabled", true);
+
+
+                    }else{
+                        regIsCommitPsw=true;
+                        $("#passMsg").text("");
+                        $("#zcyz").attr("disabled", false);
+                    }
+                }
+
+            });
+
+
+        });
+
     });
 
 

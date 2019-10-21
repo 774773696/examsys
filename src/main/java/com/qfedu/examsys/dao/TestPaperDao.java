@@ -1,5 +1,6 @@
 package com.qfedu.examsys.dao;
 
+import com.qfedu.examsys.pojo.ESinglequestions;
 import com.qfedu.examsys.pojo.ETestpaper;
 
 import java.util.List;
@@ -18,4 +19,11 @@ public interface TestPaperDao {
      * @return
      */
     public List<ETestpaper> findtestPaperBySubjectId(Integer subjectId);
+
+    /**
+     * 导入单选题的方法
+     */
+    public void addSingleQuestions(List<ESinglequestions> list);
+
+
 }
