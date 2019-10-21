@@ -159,4 +159,8 @@
             </if>
         </where>
     </select>
+
+    <select id="findAllProfession" resultType="string">
+        select distinct uprofession from e_user;
+    </select>
 </mapper>
