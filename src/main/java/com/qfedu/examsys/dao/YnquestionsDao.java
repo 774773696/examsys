@@ -10,5 +10,7 @@ public interface YnquestionsDao {
 
     public void delYnquestions(int yqId);
 
+    public EYnquestions updateYnquestions(int yqId);
+
 
 }

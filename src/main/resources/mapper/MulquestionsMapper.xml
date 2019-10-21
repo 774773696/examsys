@@ -15,5 +15,7 @@
         DELETE from e_mulquestions where mqId=#{mqId}
     </delete>
 
-
+    <select id="updateMulquestions" resultType="com.qfedu.examsys.pojo.EMulquestions">
+        select * from e_mulquestions where mqId=#{mqId}
+    </select>
 </mapper>

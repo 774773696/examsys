@@ -30,9 +30,9 @@
 			       </button>
 				</div>
 			</div>
-			
 
-            <div class="layui-inline" style="float: right">                
+
+            <div class="layui-inline" style="float: right">
                 <div class="layui-input-inline">
                     <select name="course" id="course" class="course">
                         <option value="">请选择科目</option>
@@ -54,13 +54,13 @@
 		<table class="layui-hide" id="SingDemo" lay-filter="sing" lay-skin="nob"></table>
 		</div>
 	    <div class="layui-tab-item">
-		<table class="layui-hide" id="mulDemo" lay-filter="test2" lay-skin="nob"></table>
+		<table class="layui-hide" id="mulDemo" lay-filter="mul" lay-skin="nob"></table>
 		</div>
 	    <div class="layui-tab-item">
-		<table class="layui-hide" id="anDemo" lay-filter="test3" lay-skin="nob"></table>
+		<table class="layui-hide" id="anDemo" lay-filter="an" lay-skin="nob"></table>
 		</div>
 	    <div class="layui-tab-item">
-		<table class="layui-hide" id="YnDemo" lay-filter="test4" lay-skin="nob"></table>
+		<table class="layui-hide" id="YnDemo" lay-filter="yn" lay-skin="nob"></table>
 		</div>
 	  </div>
 	</div>
@@ -123,18 +123,18 @@
 
 		<script type="text/html" id="barDemo2">
 			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del2">删除</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delMul">删除</a>
 		</script>
 
 
 		<script type="text/html" id="barDemo3">
 			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del3">删除</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delAn">删除</a>
 		</script>
 
     <script type="text/html" id="barDemo4">
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del4">删除</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delYn">删除</a>
     </script>
 
 
@@ -479,11 +479,11 @@
         });
 
 		//监听行工具事件
-		table.on('tool(test2)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+		table.on('tool(mul)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
 			var rowData = obj.data //获得当前行数据
 					,layEvent = obj.event //获得 lay-event 对应的值
 					,tr = obj.tr;
-			if(layEvent === 'del2'){
+			if(layEvent === 'delMul'){
 				alert(JSON.stringify(rowData));
 				layer.confirm('真的删除该行么', function(index){
 					$.ajax({
@@ -518,11 +518,11 @@
 			}
 		});
 //监听行工具事件
-		table.on('tool(test3)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+		table.on('tool(an)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
 			var rowData = obj.data //获得当前行数据
 					,layEvent = obj.event //获得 lay-event 对应的值
 					,tr = obj.tr;
-			if(layEvent === 'del3'){
+			if(layEvent === 'delAn'){
 				alert(JSON.stringify(rowData));
 				layer.confirm('真的删除该行么', function(index){
 					$.ajax({
@@ -557,11 +557,11 @@
 			}
 		});
 		//监听行工具事件
-		table.on('tool(test4)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+		table.on('tool(yn)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
 			var rowData = obj.data //获得当前行数据
 					,layEvent = obj.event //获得 lay-event 对应的值
 					,tr = obj.tr;
-			if(layEvent === 'del4'){
+			if(layEvent === 'delYn'){
 				alert(JSON.stringify(rowData));
 				layer.confirm('真的删除该行么', function(index){
 					$.ajax({

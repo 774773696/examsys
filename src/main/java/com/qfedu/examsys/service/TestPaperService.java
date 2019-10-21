@@ -34,7 +34,7 @@ public interface TestPaperService {
      */
     public List<ETestpaper> findAllTestPaper();
 
-<<<<<<< HEAD
+
 
     public void delAnswerquestions(int aqId);
 
@@ -45,8 +45,15 @@ public interface TestPaperService {
     public void delYnquestions(int yqId);
 
 
-
-=======
     public void uploadSingleQuestion(MultipartFile file);
->>>>>>> 958b68ca135e5831a231c6000d435f73a9c207ee
+
+
+
+    public ESinglequestions updateSingleQuestions(int sqId);
+
+    public EAnswerquestions updateAnswerquestions(int aqId);
+
+    public EMulquestions updateMulquestions(int mqId);
+
+    public EYnquestions updateYnquestions(int yqId);
 }

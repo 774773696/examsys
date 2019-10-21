@@ -13,5 +13,9 @@ public interface SinglequestionsDao {
     //添加单选题
     public void addSingleQuestions(ESinglequestions singlequestions);
 
+    //删除单选（一行）
     public void delSingleQuestions(int sqId);
+
+
+    public ESinglequestions updateSingleQuestions(int sqId);
 }

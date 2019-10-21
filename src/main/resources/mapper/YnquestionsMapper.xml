@@ -14,7 +14,9 @@
         DELETE from e_ynquestions where yqId=#{yqId}
     </delete>
 
-
+    <select id="updateYnquestions" resultType="com.qfedu.examsys.pojo.EYnquestions">
+        select * from e_ynquestions where yqId=#{yqId}
+    </select>
 
 
 

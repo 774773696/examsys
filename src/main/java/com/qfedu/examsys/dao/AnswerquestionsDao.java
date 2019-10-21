@@ -10,5 +10,5 @@ public interface AnswerquestionsDao {
 
     public void delAnswerquestions(int aqId);
 
-
+    public EAnswerquestions updateAnswerquestions(int aqId);
 }

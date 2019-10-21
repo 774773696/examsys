@@ -13,7 +13,9 @@
         DELETE from e_answerquestions where aqId=#{aqId}
     </delete>
 
-
+    <select id="updateAnswerquestions" resultType="com.qfedu.examsys.pojo.EAnswerquestions">
+        select * from e_answerquestions where aqId=#{aqId}
+    </select>
 
 
 

@@ -138,4 +138,24 @@ public class TestPaperServiceImpl implements TestPaperService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public ESinglequestions updateSingleQuestions(int sqId) {
+        return singlequestionsDao.updateSingleQuestions(sqId);
+    }
+
+    @Override
+    public EAnswerquestions updateAnswerquestions(int aqId) {
+        return answerquestionsDao.updateAnswerquestions(aqId);
+    }
+
+    @Override
+    public EMulquestions updateMulquestions(int mqId) {
+        return mulquestionsDao.updateMulquestions(mqId);
+    }
+
+    @Override
+    public EYnquestions updateYnquestions(int yqId) {
+        return ynquestionsDao.updateYnquestions(yqId);
+    }
 }

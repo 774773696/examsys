@@ -9,4 +9,6 @@ public interface MulquestionsDao {
     public List<EMulquestions> findAllMulquestions();
 
     public void delMulquestions(int mqId);
+
+    public EMulquestions updateMulquestions(int mqId);
 }
