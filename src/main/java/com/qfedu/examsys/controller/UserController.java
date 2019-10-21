@@ -113,9 +113,13 @@ public class UserController {
     @RequestMapping("/update")
     public JsonBean update(EUser eUser) {
 
-        userService.update(eUser);
+        try {
+            userService.update(eUser);
+            return new JsonBean(0, null);
+        } catch (Exception e) {
+            return new JsonBean(1, e.getMessage());
+        }
 
-        return new JsonBean(0, null);
     }
 
     @RequestMapping("/profession")

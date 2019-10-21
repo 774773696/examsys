@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>layui在线调试</title>
+    <title></title>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <script type="text/javascript" src="js/jquery-1.12.2.min.js" ></script>
 
@@ -146,17 +146,17 @@
             }
         });
 
-        // //监听提交
-        // form.on('submit(formDemo)', function(data){
-        //     layer.msg(JSON.stringify(data.field));
-        //
-        //     table.reload('demo',{
-        //         url:'condition?',
-        //         where : JSON.stringify(data.field)
-        //     });
-        //
-        //     return false;
-        // });
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+
+            table.reload('demo',{
+                url:'number',
+                where : JSON.stringify(data.field)
+            });
+
+            return false;
+        });
 
         //分页
         laypage.render({
