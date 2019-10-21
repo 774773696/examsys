@@ -20,9 +20,10 @@
         DELETE from e_singlequestions where sqId=#{sqId}
     </delete>
 
-    <select id="updateSingleQuestions" resultType="com.qfedu.examsys.pojo.ESinglequestions">
-        select * from e_singlequestions where sqId=#{sqId}
-    </select>
+    <update id="updateSingleQuestions" >
+
+    update e_singlequestions set stitle = #{stitle},soptiona=#{soptiona},soptionb=#{soptionb},soptionc=#{soptionc},soptiond=#{soptiond},sanswer=#{sanswer} where sqId=#{sqId}
+    </update>
 
 
 

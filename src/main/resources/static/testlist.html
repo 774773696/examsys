@@ -116,24 +116,114 @@
             </div>
         </form>
     </div>
+	<form id="editSingForm" method="post" hidden = "hidden">
+		<div class="layui-form-item">
+			<label class="layui-form-label">题目编号</label>
+			<div class="layui-input-block"><input type="text" disabled class="layui-input" id="sqId"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">题目</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="stitle"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">选项A</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="soptiona"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">选项B</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="soptionb"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">选项C</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="soptionc"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">选项D</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="soptiond"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">答案</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="sanswer"></div>
+		</div>
+	</form>
+	<form id="editMulForm" method="post" hidden = "hidden">
+		<div class="layui-form-item">
+			<label class="layui-form-label">题目编号</label>
+			<div class="layui-input-block"><input type="text" disabled class="layui-input" id="mqId"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">题目</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="mtitle"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">选项A</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="moptiona"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">选项B</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="moptionb"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">选项C</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="moptionc"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">选项D</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="moptiond"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">答案</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="manswer"></div>
+		</div>
+	</form>
+	<form id="editAnForm" method="post" hidden = "hidden">
+		<div class="layui-form-item">
+			<label class="layui-form-label">题目编号</label>
+			<div class="layui-input-block"><input type="text" disabled class="layui-input" id="aqId"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">题目</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="atitle"></div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">答案</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="aanswer"></div>
+		</div>
+	</form>
+	<form id="editYnForm" method="post" hidden = "hidden">
+		<div class="layui-form-item">
+			<label class="layui-form-label">题目编号</label>
+			<div class="layui-input-block"><input type="text" disabled class="layui-input" id="yqId"></div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">题目</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="ytitle"></div>
+		</div>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">答案</label>
+			<div class="layui-input-block"><input type="text" class="layui-input" id="yanswer"></div>
+		</div>
+	</form>
 		<script type="text/html" id="barDemo1">
 			<a class="layui-btn layui-btn-xs" lay-event="editSing">编辑</a>
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delSing">删除</a>
 		</script>
 
 		<script type="text/html" id="barDemo2">
-			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+			<a class="layui-btn layui-btn-xs" lay-event="editMul">编辑</a>
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delMul">删除</a>
 		</script>
 
 
 		<script type="text/html" id="barDemo3">
-			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+			<a class="layui-btn layui-btn-xs" lay-event="editAn">编辑</a>
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delAn">删除</a>
 		</script>
 
     <script type="text/html" id="barDemo4">
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs" lay-event="editYn">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delYn">删除</a>
     </script>
 
@@ -465,16 +555,66 @@
                     });
                     layer.close(index);
                 });
-            } else if(layEvent === 'edit'){
-                layer.open({
-                    type: 2,
-                    area:['600px', '550px'],
-                    title: "更改信息",
-                    fixed: false, //不固定
-                    maxmin: true,
-                    maxmin: false,
-                    content:'/videos/modifyVideo.jsp?id=' + rowData.id
-                });
+            } else if(layEvent === 'editSing'){
+            	alert(JSON.stringify(rowData));
+				layer.open({
+					type: 1,
+					title: "编辑单选",
+					maxmin: true,
+					shadeClose: true,
+					area: ['600px', '500px'],
+					shade: 0.4,
+					skin: 'layui-layer-rim',
+					content : $('#editSingForm'),
+					btn: ['确定', '取消'],
+					shade: [0.8, '#393D49'],
+					//content: ["/permission/edit", "no"],
+					success : function(layero, index) {
+						$("#sqId").val(rowData.sqId);
+						$("#stitle").val(rowData.stitle);
+						$("#soptiona").val(rowData.soptiona);
+						$("#soptionb").val(rowData.soptionb);
+						$("#soptionc").val(rowData.soptionc);
+						$("#soptiond").val(rowData.soptiond);
+						$("#sanswer").val(rowData.sanswer);
+					},
+					btn1:function(index,layero){
+						$.ajax({
+							type:'post',
+							url:'modifiedTestPaper.do',
+							data: { sqId:$("#sqId").val(),
+								stitle:$("#stitle").val(),
+								soptiona:$("#soptiona").val(),
+								soptionb:$("#soptionb").val(),
+								soptionc:$("#soptionc").val(),
+								soptiond:$("#soptiond").val(),
+								sanswer:$("#sanswer").val()
+							},
+							dataType: "json",
+							contentType: "application/json",
+							success: function (respMsg) {
+								console.log(respMsg)
+								if (respMsg.code == 0) {
+									layer.closeAll();
+									layer.msg('修改成功', {
+										icon: 1,
+										time: 2000 //2秒关闭（如果不配置，默认是3秒）
+									});
+									setTimeout(function(){
+										//这里写时间到后执行的代码
+										window.location.reload();
+									}, 2000);
+								} else {
+									layer.msg('添加失败', {
+										icon: 3,
+										time: 2000 //2秒关闭（如果不配置，默认是3秒）
+									});
+								}
+
+							}
+						});
+					}
+				});
             }
         });
 
@@ -505,15 +645,65 @@
 					});
 					layer.close(index);
 				});
-			} else if(layEvent === 'edit'){
+			} else if(layEvent === 'editMul'){
+
 				layer.open({
-					type: 2,
-					area:['600px', '550px'],
-					title: "更改信息",
-					fixed: false, //不固定
+					type: 1,
+					title: "编辑多选",
 					maxmin: true,
-					maxmin: false,
-					content:'/videos/modifyVideo.jsp?id=' + rowData.id
+					shadeClose: true,
+					area: ['600px', '500px'],
+					shade: 0.4,
+					skin: 'layui-layer-rim',
+					content : $('#editMulForm'),
+					btn: ['确定', '取消'],
+					shade: [0.8, '#393D49'],
+					//content: ["/permission/edit", "no"],
+					success : function(layero, index) {
+						$("#mqId").val(rowData.mqId);
+						$("#mtitle").val(rowData.mtitle);
+						$("#moptiona").val(rowData.moptiona);
+						$("#moptionb").val(rowData.moptionb);
+						$("#moptionc").val(rowData.moptionc);
+						$("#moptiond").val(rowData.moptiond);
+						$("#manswer").val(rowData.manswer);
+					},
+					btn1:function(index,layero){
+						$.ajax({
+							type:'post',
+							url:'modifiedTestPaper.do',
+							data: { sqId:$("#mqId").val(),
+								stitle:$("#mtitle").val(),
+								soptiona:$("#moptiona").val(),
+								soptionb:$("#moptionb").val(),
+								soptionc:$("#moptionc").val(),
+								soptiond:$("#moptiond").val(),
+								sanswer:$("#manswer").val()
+							},
+							dataType: "json",
+							contentType: "application/json",
+							success: function (respMsg) {
+								console.log(respMsg)
+								if (respMsg.code == 0) {
+									layer.closeAll();
+									layer.msg('修改成功', {
+										icon: 1,
+										time: 2000 //2秒关闭（如果不配置，默认是3秒）
+									});
+									setTimeout(function(){
+										//这里写时间到后执行的代码
+										window.location.reload();
+									}, 2000);
+								} else {
+									layer.msg('添加失败', {
+										icon: 3,
+										time: 2000 //2秒关闭（如果不配置，默认是3秒）
+									});
+								}
+
+							}
+						});
+					}
 				});
 			}
 		});
@@ -544,15 +734,56 @@
 					});
 					layer.close(index);
 				});
-			} else if(layEvent === 'edit'){
+			} else if(layEvent === 'editAn'){
 				layer.open({
-					type: 2,
-					area:['600px', '550px'],
-					title: "更改信息",
-					fixed: false, //不固定
+					type: 1,
+					title: "编辑简答",
 					maxmin: true,
-					maxmin: false,
-					content:'/videos/modifyVideo.jsp?id=' + rowData.id
+					shadeClose: true,
+					area: ['600px', '500px'],
+					shade: 0.4,
+					skin: 'layui-layer-rim',
+					content : $('#editAnForm'),
+					btn: ['确定', '取消'],
+					shade: [0.8, '#393D49'],
+					//content: ["/permission/edit", "no"],
+					success : function(layero, index) {
+						$("#aqId").val(rowData.aqId);
+						$("#atitle").val(rowData.atitle);
+						$("#aanswer").val(rowData.aanswer);
+					},
+					btn1:function(index,layero){
+						$.ajax({
+							type:'post',
+							url:'modifiedTestPaper.do',
+							data: { aqId:$("#aqId").val(),
+								atitle:$("#atitle").val(),
+								aanswer:$("#aanswer").val()
+							},
+							dataType: "json",
+							contentType: "application/json",
+							success: function (respMsg) {
+								console.log(respMsg)
+								if (respMsg.code == 0) {
+									layer.closeAll();
+									layer.msg('修改成功', {
+										icon: 1,
+										time: 2000 //2秒关闭（如果不配置，默认是3秒）
+									});
+									setTimeout(function(){
+										//这里写时间到后执行的代码
+										window.location.reload();
+									}, 2000);
+								} else {
+									layer.msg('添加失败', {
+										icon: 3,
+										time: 2000 //2秒关闭（如果不配置，默认是3秒）
+									});
+								}
+
+							}
+						});
+					}
 				});
 			}
 		});
@@ -583,16 +814,58 @@
 					});
 					layer.close(index);
 				});
-			} else if(layEvent === 'edit'){
+			} else if(layEvent === 'editYn'){
 				layer.open({
-					type: 2,
-					area:['600px', '550px'],
-					title: "更改信息",
-					fixed: false, //不固定
+					type: 1,
+					title: "编辑判断",
 					maxmin: true,
-					maxmin: false,
-					content:'/videos/modifyVideo.jsp?id=' + rowData.id
+					shadeClose: true,
+					area: ['600px', '500px'],
+					shade: 0.4,
+					skin: 'layui-layer-rim',
+					content : $('#editYnForm'),
+					btn: ['确定', '取消'],
+					shade: [0.8, '#393D49'],
+					//content: ["/permission/edit", "no"],
+					success : function(layero, index) {
+						$("#yqId").val(rowData.yqId);
+						$("#ytitle").val(rowData.ytitle);
+						$("#yanswer").val(rowData.yanswer);
+					},
+					btn1:function(index,layero){
+						$.ajax({
+							type:'post',
+							url:'modifiedTestPaper.do',
+							data: { yqId:$("#yqId").val(),
+								ytitle:$("#ytitle").val(),
+								yanswer:$("#yanswer").val()
+							},
+							dataType: "json",
+							contentType: "application/json",
+							success: function (respMsg) {
+								console.log(respMsg)
+								if (respMsg.code == 0) {
+									layer.closeAll();
+									layer.msg('修改成功', {
+										icon: 1,
+										time: 2000 //2秒关闭（如果不配置，默认是3秒）
+									});
+									setTimeout(function(){
+										//这里写时间到后执行的代码
+										window.location.reload();
+									}, 2000);
+								} else {
+									layer.msg('添加失败', {
+										icon: 3,
+										time: 2000 //2秒关闭（如果不配置，默认是3秒）
+									});
+								}
+
+							}
+						});
+					}
 				});
+
 			}
 		});
         function selectTeacher() {
