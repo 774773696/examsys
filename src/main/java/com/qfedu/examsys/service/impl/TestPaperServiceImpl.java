@@ -7,12 +7,15 @@ import com.qfedu.examsys.dao.*;
 import com.qfedu.examsys.pojo.*;
 import com.qfedu.examsys.service.TestPaperService;
 import com.qfedu.examsys.utils.ExcelUtils;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +56,7 @@ public class TestPaperServiceImpl implements TestPaperService {
     public List<ESinglequestions> findAllSingleQuestions(Integer page, Integer limit) {
         //设置查询的页码和每页显示的记录数
         //该语句后面，一定要紧跟着查询用的方法
-        PageHelper.startPage(page,limit);
+        PageHelper.startPage(page, limit);
         return singlequestionsDao.findAllSingleQuestions();
     }
 
@@ -61,19 +64,19 @@ public class TestPaperServiceImpl implements TestPaperService {
     public List<EYnquestions> findAllYnquestions(Integer page, Integer limit) {
         //设置查询的页码和每页显示的记录数
         //该语句后面，一定要紧跟着查询用的方法
-        PageHelper.startPage(page,limit);
+        PageHelper.startPage(page, limit);
         return ynquestionsDao.findAllYnquestions();
     }
 
     @Override
     public List<EMulquestions> findAllMulquestions(Integer page, Integer limit) {
-        PageHelper.startPage(page,limit);
+        PageHelper.startPage(page, limit);
         return mulquestionsDao.findAllMulquestions();
     }
 
     @Override
     public List<EAnswerquestions> findAllAnswerquestions(Integer page, Integer limit) {
-        PageHelper.startPage(page,limit);
+        PageHelper.startPage(page, limit);
         return answerquestionsDao.findAllAnswerquestions();
     }
 
@@ -94,9 +97,11 @@ public class TestPaperServiceImpl implements TestPaperService {
 
     @Override
     public void uploadSingleQuestion(MultipartFile file) {
+        InputStream inputStream = null;
+        BufferedWriter bufferedWriter = null;
+        List<String> sheetList = null;
         try {
-            InputStream inputStream = file.getInputStream();
-
+            inputStream = file.getInputStream();
             //文件名
             String originalFilename = file.getOriginalFilename();
 
@@ -105,16 +110,55 @@ public class TestPaperServiceImpl implements TestPaperService {
             ObjectMapper objectMapper = new ObjectMapper();
             //将List转成json格式数据
             String jsonStr = objectMapper.writeValueAsString(list);
-            //将json格式数据转成指定对象
-            List<ESinglequestions> sqList = objectMapper.readValue(jsonStr, new TypeReference<List<ESinglequestions>>(){
-            });
 
-            System.out.println(sqList.get(0));
-            //将选择题对象集合存入数据库
-            testPaperDao.addSingleQuestions(sqList);
+            sheetList = ExcelUtils.GetMapKey(list);
+
+            if (sheetList.contains("stitle") == true) {
+                //将json格式数据转成指定对象
+                List<ESinglequestions> sqList = objectMapper.readValue(jsonStr, new TypeReference<List<ESinglequestions>>() {
+                });
+                // 保存到数据库
+                testPaperDao.addSingleQuestions(sqList);
+            } else if (sheetList.contains("ftitle") == true) {
+                List<EFillquestions> sqList = objectMapper.readValue(jsonStr, new TypeReference<List<EFillquestions>>() {
+                });
+                // 保存到数据库
+                testPaperDao.addFillQuestion(sqList);
+            } else if (sheetList.contains("mtitle") == true) {
+                List<EMulquestions> sqList = objectMapper.readValue(jsonStr, new TypeReference<List<EMulquestions>>() {
+                });
+                // 保存到数据库
+                testPaperDao.addMulQuestions(sqList);
+            } else if (sheetList.contains("atitle") == true) {
+                List<EAnswerquestions> sqList = objectMapper.readValue(jsonStr, new TypeReference<List<EAnswerquestions>>() {
+                });
+                // 保存到数据库
+                testPaperDao.addAnswerQustions(sqList);
+            } else if (sheetList.contains("ytitle")){
+                List<EYnquestions> sqList = objectMapper.readValue(jsonStr, new TypeReference<List<EYnquestions>>() {
+                });
+                // 保存到数据库
+                testPaperDao.addYnQuestion(sqList);
+            } else {
+                throw new RuntimeException("导入文件格式不正确");
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+//        finally {
+//            try {
+
+//                /* 关闭文件流 */
+//                bufferedWriter.close();
+//                inputStream.close();
+//
+//            } catch (Exception e3) {
+//                // TODO: handle exception
+//                e3.printStackTrace();
+//            }
+//        }
+        }
 }
+
+

@@ -3,6 +3,7 @@ package com.qfedu.examsys.service;
 import com.qfedu.examsys.pojo.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface TestPaperService {
@@ -34,5 +35,10 @@ public interface TestPaperService {
      */
     public List<ETestpaper> findAllTestPaper();
 
-    public void uploadSingleQuestion(MultipartFile file);
+    /**
+     * 上传题
+     * @param file
+     * @throws IOException
+     */
+    public void uploadSingleQuestion(MultipartFile file) throws IOException;
 }

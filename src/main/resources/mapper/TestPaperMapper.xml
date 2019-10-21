@@ -19,4 +19,37 @@
             #{sq.soptionc},#{sq.soptiond},#{sq.sanswer})
         </foreach>
     </insert>
+
+    <insert id="addAnswerQustions" parameterType="list">
+        insert into e_answerquestions (atitle, aanswer)
+        values
+        <foreach collection="list" item="sq" separator=",">
+            (#{sq.atitle},#{sq.aanswer})
+        </foreach>
+    </insert>
+
+    <insert id="addMulQuestions" parameterType="list">
+        insert into e_mulquestions (mtitle, moptiona, moptionb, moptionc, moptiond, manswer)
+        values
+        <foreach collection="list" item="sq" separator=",">
+            (#{sq.mtitle},#{sq.moptiona},#{sq.moptionb},
+            #{sq.moptionc},#{sq.moptiond},#{sq.manswer})
+        </foreach>
+    </insert>
+
+    <insert id="addFillQuestion" parameterType="list">
+        insert into e_fillquestions (ftitle, fanswer)
+        values
+        <foreach collection="list" item="sq" separator=",">
+            (#{sq.ftitle},#{sq.fanswer})
+        </foreach>
+    </insert>
+
+    <insert id="addYnQuestion" parameterType="list">
+        insert into e_ynquestions (ytitle, yanswer)
+        values
+        <foreach collection="list" item="sq" separator=",">
+            (#{sq.ytitle},#{sq.yanswer})
+        </foreach>
+    </insert>
 </mapper>

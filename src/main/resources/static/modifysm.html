@@ -37,12 +37,13 @@
             <label class="layui-form-label" style="width: 90px">更改结束时间</label>
             <div class="layui-input-block">
                 <input type="text" name="smEndTime" id="smEndTime" required style="width: 240px" lay-verify="required" placeholder="格式：2019-10-09 08:00:00"  class="layui-input">
+                <span id="passMsg"></span>
             </div>
         </div>
       
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="save2" >提交</button>
+                <button class="layui-btn" lay-submit lay-filter="save2" id="zcyz">提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>

@@ -528,7 +528,18 @@
 					});
                     setTimeout(function () {
                         location.reload();
-                    },1500);
+                    },1000);
+				} else {
+					layer.alert('上传失败,请检查文件格式或重传！', {
+						skin: 'layui-layer-molv' //样式类名  自定义样式
+						,closeBtn: 1    // 是否显示关闭按钮
+						,anim: 1 //动画类型
+						,btn: ['确定'] //按钮
+						,icon: 6    // icon
+					});
+					setTimeout(function () {
+						location.reload();
+					},2000);
 				}
 					// location.reload();
 		}
