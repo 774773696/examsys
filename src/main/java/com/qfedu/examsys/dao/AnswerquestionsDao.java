@@ -8,5 +8,7 @@ public interface AnswerquestionsDao {
     //查询所有的简答题
     public List<EAnswerquestions> findAllAnswerquestions();
 
+    public void delAnswerquestions(int aqId);
 
+    public EAnswerquestions updateAnswerquestions(int aqId);
 }

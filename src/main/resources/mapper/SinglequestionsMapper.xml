@@ -16,6 +16,14 @@
          values(#{stitle},#{soptiona},#{soptionb},#{soptionc},#{soptiond},#{sanswer})
     </insert>
 
+    <delete id="delSingleQuestions">
+        DELETE from e_singlequestions where sqId=#{sqId}
+    </delete>
+
+    <select id="updateSingleQuestions" resultType="com.qfedu.examsys.pojo.ESinglequestions">
+        select * from e_singlequestions where sqId=#{sqId}
+    </select>
+
 
 
 

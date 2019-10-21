@@ -101,18 +101,18 @@
         var layer = layui.layer
             ,form = layui.form;
 
-        // //自定义验证规则
-        // form.verify({
-        //     uphone: [
-        //         /^1[3578]\d{9}$/
-        //         ,'手机格式不正确'
-        //     ],
-        //     uage: [
-        //         /^[1-9]\d{0,2}$/
-        //         ,'年龄格式不正确'
-        //     ]
-        //
-        // });
+        //自定义验证规则
+        form.verify({
+            uphone: [
+                /^1[3578]\d{9}$/
+                ,'手机格式不正确'
+            ],
+            uage: [
+                /^[1-9]\d{0,2}$/
+                ,'年龄格式不正确'
+            ]
+
+        });
 
         //监听提交
         form.on('submit(demo1)', function(data){
@@ -126,15 +126,11 @@
                 url:"register",
                 data:data.field,
                 dataType:"json",
-                success:function(data){  //{code:1,info:....}
-                    if(data.code == 0){
+                success:function(){  //{code:1,info:....}
                         var t = parent.layui.table;
                         t.reload('demo');// 重新加载页面,demo 表示父窗体table标签的id值
                         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                         parent.layer.close(index); //再执行关闭
-                    }else{
-                        alert(data.info);
-                    }
                 }
             })
 

@@ -35,10 +35,26 @@ public interface TestPaperService {
      */
     public List<ETestpaper> findAllTestPaper();
 
-    /**
-     * 上传题
-     * @param file
-     * @throws IOException
-     */
-    public void uploadSingleQuestion(MultipartFile file) throws IOException;
+
+
+    public void delAnswerquestions(int aqId);
+
+
+    public void delMulquestions(int mqId);
+    public void delSingleQuestions(int sqId);
+
+    public void delYnquestions(int yqId);
+
+
+    public void uploadSingleQuestion(MultipartFile file);
+
+
+
+    public ESinglequestions updateSingleQuestions(int sqId);
+
+    public EAnswerquestions updateAnswerquestions(int aqId);
+
+    public EMulquestions updateMulquestions(int mqId);
+
+    public EYnquestions updateYnquestions(int yqId);
 }

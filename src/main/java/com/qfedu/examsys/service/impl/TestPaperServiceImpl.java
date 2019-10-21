@@ -91,6 +91,27 @@ public class TestPaperServiceImpl implements TestPaperService {
     }
 
     @Override
+    public void delAnswerquestions(int aqId) {
+        answerquestionsDao.delAnswerquestions(aqId);
+    }
+
+    @Override
+    public void delMulquestions(int mqId) {
+        mulquestionsDao.delMulquestions(mqId);
+    }
+
+    @Override
+    public void delSingleQuestions(int sqId) {
+        singlequestionsDao.delSingleQuestions(sqId);
+    }
+
+    @Override
+    public void delYnquestions(int yqId) {
+        ynquestionsDao.delYnquestions(yqId);
+    }
+
+
+    @Override
     public void importSinglequestions() {
 
     }
@@ -159,6 +180,27 @@ public class TestPaperServiceImpl implements TestPaperService {
 //            }
 //        }
         }
+
+
+    @Override
+    public ESinglequestions updateSingleQuestions(int sqId) {
+        return singlequestionsDao.updateSingleQuestions(sqId);
+    }
+
+    @Override
+    public EAnswerquestions updateAnswerquestions(int aqId) {
+        return answerquestionsDao.updateAnswerquestions(aqId);
+    }
+
+    @Override
+    public EMulquestions updateMulquestions(int mqId) {
+        return mulquestionsDao.updateMulquestions(mqId);
+    }
+
+    @Override
+    public EYnquestions updateYnquestions(int yqId) {
+        return ynquestionsDao.updateYnquestions(yqId);
+    }
 }
 
 
