@@ -51,16 +51,16 @@
 	  </ul>
 	  <div class="layui-tab-content">
 	    <div class="layui-tab-item layui-show">
-		<table class="layui-hide" id="SingDemo" lay-filter="test" lay-skin="nob"></table>
+		<table class="layui-hide" id="SingDemo" lay-filter="sing" lay-skin="nob"></table>
 		</div>
 	    <div class="layui-tab-item">
-		<table class="layui-hide" id="mulDemo" lay-filter="test" lay-skin="nob"></table>
+		<table class="layui-hide" id="mulDemo" lay-filter="test2" lay-skin="nob"></table>
 		</div>
 	    <div class="layui-tab-item">
-		<table class="layui-hide" id="anDemo" lay-filter="test" lay-skin="nob"></table>
+		<table class="layui-hide" id="anDemo" lay-filter="test3" lay-skin="nob"></table>
 		</div>
 	    <div class="layui-tab-item">
-		<table class="layui-hide" id="YnDemo" lay-filter="test" lay-skin="nob"></table>
+		<table class="layui-hide" id="YnDemo" lay-filter="test4" lay-skin="nob"></table>
 		</div>
 	  </div>
 	</div>
@@ -116,17 +116,27 @@
             </div>
         </form>
     </div>
+		<script type="text/html" id="barDemo1">
+			<a class="layui-btn layui-btn-xs" lay-event="editSing">编辑</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delSing">删除</a>
+		</script>
 
-    
-	
-	
-	
-	
+		<script type="text/html" id="barDemo2">
+			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del2">删除</a>
+		</script>
 
-    <script type="text/html" id="barDemo">
+
+		<script type="text/html" id="barDemo3">
+			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del3">删除</a>
+		</script>
+
+    <script type="text/html" id="barDemo4">
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del4">删除</a>
     </script>
+
 
 </div>
 
@@ -170,9 +180,9 @@
                 ,{field: 'soptionc', align:'center', title: '选项C'}
                 ,{field: 'soptiond', align:'center', title: '选项D' }
                 ,{field: 'sanswer', align:'center', title: '答案'}
-                ,{title: '操作',  align:'center', toolbar: '#barDemo'}
+                ,{title: '操作',  align:'center', toolbar: '#barDemo1'}
             ]]
-            ,id:'videoTable'
+            ,id:'singTable'
             ,done: function (res) {
                 //数据总条数,res为url接口传回的数据
                 //totalNum =res.total
@@ -205,9 +215,9 @@
 		        ,{field: 'yqId', align:'center', title: '题目编号'}
 		        ,{field: 'ytitle', align:'center', title: '题目'}
 		        ,{field: 'sanswer', align:'center', title: '答案'}
-		        ,{title: '操作',  align:'center', toolbar: '#barDemo'}
+		        ,{title: '操作',  align:'center', toolbar: '#barDemo4'}
 		    ]]
-		    ,id:'videoTable'
+		    ,id:'ynTable'
 		    ,done: function (res) {
 		        //数据总条数,res为url接口传回的数据
 		        //totalNum =res.total
@@ -243,9 +253,9 @@
                 ,{field: 'moptionc', align:'center', title: '选项C'}
                 ,{field: 'moptiond', align:'center', title: '选项D' }
                 ,{field: 'manswer', align:'center', title: '答案'}
-                ,{title: '操作',  align:'center', toolbar: '#barDemo'}
+                ,{title: '操作',  align:'center', toolbar: '#barDemo2'}
             ]]
-		    ,id:'videoTable'
+		    ,id:'mulTable'
 		    ,done: function (res) {
 		        //数据总条数,res为url接口传回的数据
 		        //totalNum =res.total
@@ -277,9 +287,9 @@
 		        ,{field: 'aqId', align:'center', title: '题目编号'}
 		        ,{field: 'atitle', align:'center', title: '题目'}
 		        ,{field: 'aanswer', align:'center', title: '答案'}
-		        ,{title: '操作',  align:'center', toolbar: '#barDemo'}
+		        ,{title: '操作',  align:'center', toolbar: '#barDemo3'}
 		    ]]
-		    ,id:'videoTable'
+		    ,id:'anTable'
 		    ,done: function (res) {
 		        //数据总条数,res为url接口传回的数据
 		        //totalNum =res.total
@@ -429,16 +439,17 @@
 
 
         //监听行工具事件
-        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+        table.on('tool(sing)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
             var rowData = obj.data //获得当前行数据
                 ,layEvent = obj.event //获得 lay-event 对应的值
                 ,tr = obj.tr;
-            if(layEvent === 'del'){
+            if(layEvent === 'delSing'){
+            	alert(JSON.stringify(rowData));
                 layer.confirm('真的删除该行么', function(index){
                     $.ajax({
                         type:'post',
-                        url:'video/deleteOne.do',
-                        data:{'id':rowData.id},//向服务端发送删除的id
+                        url:'delTestPaper.do',
+                        data:{'sqId':rowData.sqId},//向服务端发送删除的id
                         dataType:"json",
                         success:function(data){
                             if(data.code == 0){
@@ -467,6 +478,123 @@
             }
         });
 
+		//监听行工具事件
+		table.on('tool(test2)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+			var rowData = obj.data //获得当前行数据
+					,layEvent = obj.event //获得 lay-event 对应的值
+					,tr = obj.tr;
+			if(layEvent === 'del2'){
+				alert(JSON.stringify(rowData));
+				layer.confirm('真的删除该行么', function(index){
+					$.ajax({
+						type:'post',
+						url:'delTestPaper.do',
+						data:{'mqId':rowData.mqId},//向服务端发送删除的id
+						dataType:"json",
+						success:function(data){
+							if(data.code == 0){
+								obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+								layer.close(index);
+								console.log(index);
+								layer.msg("删除成功");
+								$(".layui-laypage-btn").click()
+							} else{
+								layer.msg("删除失败");
+							}
+						}
+					});
+					layer.close(index);
+				});
+			} else if(layEvent === 'edit'){
+				layer.open({
+					type: 2,
+					area:['600px', '550px'],
+					title: "更改信息",
+					fixed: false, //不固定
+					maxmin: true,
+					maxmin: false,
+					content:'/videos/modifyVideo.jsp?id=' + rowData.id
+				});
+			}
+		});
+//监听行工具事件
+		table.on('tool(test3)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+			var rowData = obj.data //获得当前行数据
+					,layEvent = obj.event //获得 lay-event 对应的值
+					,tr = obj.tr;
+			if(layEvent === 'del3'){
+				alert(JSON.stringify(rowData));
+				layer.confirm('真的删除该行么', function(index){
+					$.ajax({
+						type:'post',
+						url:'delTestPaper.do',
+						data:{'aqId':rowData.aqId},//向服务端发送删除的id
+						dataType:"json",
+						success:function(data){
+							if(data.code == 0){
+								obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+								layer.close(index);
+								console.log(index);
+								layer.msg("删除成功");
+								$(".layui-laypage-btn").click()
+							} else{
+								layer.msg("删除失败");
+							}
+						}
+					});
+					layer.close(index);
+				});
+			} else if(layEvent === 'edit'){
+				layer.open({
+					type: 2,
+					area:['600px', '550px'],
+					title: "更改信息",
+					fixed: false, //不固定
+					maxmin: true,
+					maxmin: false,
+					content:'/videos/modifyVideo.jsp?id=' + rowData.id
+				});
+			}
+		});
+		//监听行工具事件
+		table.on('tool(test4)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+			var rowData = obj.data //获得当前行数据
+					,layEvent = obj.event //获得 lay-event 对应的值
+					,tr = obj.tr;
+			if(layEvent === 'del4'){
+				alert(JSON.stringify(rowData));
+				layer.confirm('真的删除该行么', function(index){
+					$.ajax({
+						type:'post',
+						url:'delTestPaper.do',
+						data:{'yqId':rowData.yqId},//向服务端发送删除的id
+						dataType:"json",
+						success:function(data){
+							if(data.code == 0){
+								obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+								layer.close(index);
+								console.log(index);
+								layer.msg("删除成功");
+								$(".layui-laypage-btn").click()
+							} else{
+								layer.msg("删除失败");
+							}
+						}
+					});
+					layer.close(index);
+				});
+			} else if(layEvent === 'edit'){
+				layer.open({
+					type: 2,
+					area:['600px', '550px'],
+					title: "更改信息",
+					fixed: false, //不固定
+					maxmin: true,
+					maxmin: false,
+					content:'/videos/modifyVideo.jsp?id=' + rowData.id
+				});
+			}
+		});
         function selectTeacher() {
             $.ajax({
                 type:"post",

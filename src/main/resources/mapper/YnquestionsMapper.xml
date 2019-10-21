@@ -10,6 +10,10 @@
         select * from e_ynquestions
     </select>
 
+    <delete id="delYnquestions">
+        DELETE from e_ynquestions where yqId=#{yqId}
+    </delete>
+
 
 
 

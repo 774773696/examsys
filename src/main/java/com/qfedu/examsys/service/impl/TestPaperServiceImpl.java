@@ -80,6 +80,27 @@ public class TestPaperServiceImpl implements TestPaperService {
     }
 
     @Override
+    public void delAnswerquestions(int aqId) {
+        answerquestionsDao.delAnswerquestions(aqId);
+    }
+
+    @Override
+    public void delMulquestions(int mqId) {
+        mulquestionsDao.delMulquestions(mqId);
+    }
+
+    @Override
+    public void delSingleQuestions(int sqId) {
+        singlequestionsDao.delSingleQuestions(sqId);
+    }
+
+    @Override
+    public void delYnquestions(int yqId) {
+        ynquestionsDao.delYnquestions(yqId);
+    }
+
+
+    @Override
     public void importSinglequestions() {
 
     }

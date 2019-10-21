@@ -32,4 +32,16 @@ public interface TestPaperService {
      * @return
      */
     public List<ETestpaper> findAllTestPaper();
+
+
+    public void delAnswerquestions(int aqId);
+
+
+    public void delMulquestions(int mqId);
+    public void delSingleQuestions(int sqId);
+
+    public void delYnquestions(int yqId);
+
+
+
 }

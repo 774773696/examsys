@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.jar.JarEntry;
 
 @RestController
 public class TestPaperController {
@@ -93,5 +93,39 @@ public class TestPaperController {
             throw new RuntimeException("没有试卷，请生成");
         }
         return new JsonBean(0, eTestpaperList);
+    }
+    @RequestMapping("/delTestPaper.do")
+    public JsonBean delTestPaper(HttpServletRequest request) {
+        String sqId = request.getParameter("sqId");
+        String aqId = request.getParameter("aqId");
+        String yqId = request.getParameter("yqId");
+        String mqId = request.getParameter("mqId");
+/*        System.out.println(sqId+"sqId");
+        System.out.println(aqId+"aqId");
+        System.out.println(yqId+"yqId");
+        System.out.println(mqId+"mqId");*/
+
+        if (sqId != null){
+            testPaperService.delSingleQuestions(Integer.valueOf(sqId));
+            return new JsonBean(0, null);
+        }
+        if(aqId != null){
+            testPaperService.delAnswerquestions(Integer.valueOf(aqId));
+            return new JsonBean(0, null);
+
+        }
+        if(yqId != null){
+            testPaperService.delYnquestions(Integer.valueOf(yqId));
+            return new JsonBean(0, null);
+
+        }
+        if(mqId != null){
+            testPaperService.delMulquestions(Integer.valueOf(mqId));
+            return new JsonBean(0, null);
+
+        }
+        return new JsonBean(1, "error");
+
+
     }
 }

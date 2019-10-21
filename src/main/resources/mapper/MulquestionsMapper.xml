@@ -11,7 +11,9 @@
     </select>
 
 
-
+    <delete id="delMulquestions">
+        DELETE from e_mulquestions where mqId=#{mqId}
+    </delete>
 
 
 </mapper>

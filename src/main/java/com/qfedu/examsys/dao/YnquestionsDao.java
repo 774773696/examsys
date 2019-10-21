@@ -8,5 +8,7 @@ public interface YnquestionsDao {
     //查询所有的单选题
     public List<EYnquestions> findAllYnquestions();
 
+    public void delYnquestions(int yqId);
+
 
 }

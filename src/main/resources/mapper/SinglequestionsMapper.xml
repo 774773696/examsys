@@ -16,6 +16,10 @@
          values(#{stitle},#{soptiona},#{soptionb},#{soptionc},#{soptiond},#{sanswer})
     </insert>
 
+    <delete id="delSingleQuestions">
+        DELETE from e_singlequestions where sqId=#{sqId}
+    </delete>
+
 
 
 

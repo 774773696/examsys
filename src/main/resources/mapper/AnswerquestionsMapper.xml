@@ -9,6 +9,9 @@
     <select id="findAllAnswerquestions" resultType="com.qfedu.examsys.pojo.EAnswerquestions">
         select * from e_answerquestions
     </select>
+    <delete id="delAnswerquestions">
+        DELETE from e_answerquestions where aqId=#{aqId}
+    </delete>
 
 
 

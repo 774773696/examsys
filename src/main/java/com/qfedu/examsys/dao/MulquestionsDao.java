@@ -7,4 +7,6 @@ import java.util.List;
 public interface MulquestionsDao {
     //查询所有的单选题
     public List<EMulquestions> findAllMulquestions();
+
+    public void delMulquestions(int mqId);
 }
