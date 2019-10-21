@@ -65,6 +65,7 @@ public class ESessionMangeServiceImpl implements ESessionMangeService {
 
     @Override
     public void addSessionMange(ESessionMange eSessionMange) {
+
         eSessionMangeDao.addSessionMange(eSessionMange);
     }
 

@@ -5,15 +5,14 @@ import com.qfedu.examsys.common.JsonBean;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author TiAmo
@@ -92,6 +91,97 @@ public class ExcelUtils {
             return false;
         }
     }
+
+
+    /**
+     * 获取读取excel文件的第一行的名字
+     * @param inputStream
+     * @return
+     */
+    public static String getCellNameValue(InputStream inputStream,String fileName) {
+
+        boolean ret = isXls(fileName);
+        Workbook workbook = null;
+        try {
+            if (ret) {
+                //  2007及以上版本使用
+                workbook = new HSSFWorkbook(inputStream);
+            } else {
+                // 2003及以下版本使用
+                workbook = new XSSFWorkbook(inputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Sheet sheet = workbook.getSheetAt(0);
+
+        Cell cell=sheet.getRow(0).getCell(0);
+        String value=getCellValue(cell);
+         return  value;
+    }
+
+    public static String getCellValue(Cell cell) {
+        String cellValue = "";
+        // 以下是判断数据的类型
+        switch (cell.getCellType()) {
+            case Cell.CELL_TYPE_NUMERIC: // 数字
+                if (org.apache.poi.ss.usermodel.DateUtil.isCellDateFormatted(cell)) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    cellValue = sdf.format(org.apache.poi.ss.usermodel.DateUtil.getJavaDate(cell.getNumericCellValue())).toString();
+                } else {
+                    DataFormatter dataFormatter = new DataFormatter();
+                    cellValue = dataFormatter.formatCellValue(cell);
+                }
+                break;
+            case Cell.CELL_TYPE_STRING: // 字符串
+                cellValue = cell.getStringCellValue();
+                break;
+            case Cell.CELL_TYPE_BOOLEAN: // Boolean
+                cellValue = cell.getBooleanCellValue() + "";
+                break;
+            case Cell.CELL_TYPE_FORMULA: // 公式
+                cellValue = cell.getCellFormula() + "";
+                break;
+            case Cell.CELL_TYPE_BLANK: // 空值
+                cellValue = "";
+                break;
+            case Cell.CELL_TYPE_ERROR: // 故障
+                cellValue = "非法字符";
+                break;
+            default:
+                cellValue = "未知类型";
+                break;
+        }
+        return cellValue;
+    }
+
+    /**
+     * 得到流中的map的key的集合的方法
+     * @param listResult
+     * @return
+     */
+    public static List<String> GetMapKey(List<Map<String,Object>> listResult) {
+        if ((listResult != null) && (!listResult.isEmpty()))
+        {
+            List listKey = new ArrayList();
+
+            Map mapResult = (Map)listResult.get(0);
+
+            Set mapKeySet = mapResult.keySet();
+
+            Object listHead = "";
+
+            Iterator iteratorKey = mapKeySet.iterator();
+            while (iteratorKey.hasNext()) {
+                listHead = iteratorKey.next();
+                listKey.add(listHead);
+            }
+
+            return listKey;
+        }
+        return null;
+    }
+
 
 }
 

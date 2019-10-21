@@ -71,14 +71,26 @@ public class ESessionMangeController {
 
     @RequestMapping("/modifySessionMange.do")
     public JsonBean modifySessionMange(ESessionMange eSessionMange) {
-
+        Date betinTime = eSessionMange.getSmBeginTime();
+        Date endTime = eSessionMange.getSmEndTime();
+        // betinTime.after(endTime),当betinTime大于endTime时，返回TRUE，
+        // 当小于等于时，返回false；
+        if (betinTime.after(endTime) == true) {
+            return new JsonBean(1,"结束时间不能小于开始时间");
+        }
            eSessionMangeService.modifySessionMange(eSessionMange);
         return new JsonBean(0, "修改成功");
     }
 
     @RequestMapping("/addSessionMange.do")
     public JsonBean addSessionMange(ESessionMange eSessionMange) {
-
+        Date betinTime = eSessionMange.getSmBeginTime();
+        Date endTime = eSessionMange.getSmEndTime();
+        // betinTime.after(endTime),当betinTime大于endTime时，返回TRUE，
+        // 当小于等于时，返回false；
+        if (betinTime.after(endTime) == true) {
+            return new JsonBean(1,"结束时间不能小于开始时间");
+        }
         eSessionMangeService.addSessionMange(eSessionMange);
         return new JsonBean(0, null);
     }
