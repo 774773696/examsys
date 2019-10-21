@@ -98,7 +98,51 @@
     </delete>
 
     <update id="update" parameterType="com.qfedu.examsys.pojo.EUser">
-        update e_user set uname=#{uname}, upassword=#{upassword} where uid=#{uid}
+
+        update e_user set uname=#{uname}, upassword=#{upassword}, unumber=#{unumber}, usex=#{usex}, uage=#{uage}, uprofession=#{uprofession}, ugrade=#{ugrade}, uphone=#{uphone} where uid=#{uid}
+
+<!--        update e_user-->
+<!--        <set>-->
+<!--            <if test="uname != null">-->
+<!--                uname=#{uname},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        <set>-->
+<!--            <if test="upassword != null">-->
+<!--                upassword=#{upassword},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        <set>-->
+<!--            <if test="unumber != null">-->
+<!--                unumber=#{unumber},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        <set>-->
+<!--            <if test="usex != null">-->
+<!--                usex=#{usex},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        <set>-->
+<!--            <if test="uage != null">-->
+<!--                uage=#{uage},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        <set>-->
+<!--            <if test="uprofession != null">-->
+<!--                uprofession=#{uprofession},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        <set>-->
+<!--            <if test="ugrade != null">-->
+<!--                ugrade=#{ugrade},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        <set>-->
+<!--            <if test="uphone != null">-->
+<!--                uphone=#{uphone},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where uid=#{uid}-->
     </update>
 
     <select id="findByCondition" parameterType="map" resultMap="UserMap">

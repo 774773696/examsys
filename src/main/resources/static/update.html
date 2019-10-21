@@ -26,9 +26,23 @@
     <form class="layui-form" lay-filter="example">
 
         <div class="layui-form-item">
+            <label class="layui-form-label">ID</label>
+            <div class="layui-input-block">
+                <input type="text" name="uid" disabled lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
             <label class="layui-form-label">编号</label>
             <div class="layui-input-block">
                 <input type="text" name="unumber" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="text" name="upassword" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -50,21 +64,21 @@
         <div class="layui-form-item">
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-block">
-                <input type="text" name="uage" lay-verify="required|age" lay-reqtext="用户名是必填项，岂能为空？"autocomplete="off" class="layui-input">
+                <input type="text" name="uage" lay-verify="required|age" autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">专业</label>
             <div class="layui-input-block">
-                <input type="text" name="uprofession" lay-verify="required|age" lay-reqtext="用户名是必填项，岂能为空？"autocomplete="off" class="layui-input">
+                <input type="text" name="uprofession" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">年级</label>
             <div class="layui-input-block">
-                <input type="text" name="ugrade" lay-verify="required|age" lay-reqtext="用户名是必填项，岂能为空？"autocomplete="off" class="layui-input">
+                <input type="text" name="ugrade" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -106,19 +120,19 @@
                 }
             }
         })
-        //
-        // //自定义验证规则
-        // form.verify({
-        //     uphone: [
-        //         /^1[3578]\d{9}$/
-        //         ,'手机格式不正确'
-        //     ],
-        //     uage: [
-        //         /^[1-9]\d{0,2}$/
-        //         ,'年龄格式不正确'
-        //     ]
-        //
-        // });
+
+        //自定义验证规则
+        form.verify({
+            phone: [
+                /^1[3578]\d{9}$/
+                ,'手机格式不正确'
+            ],
+            age: [
+                /^[1-9]\d{0,2}$/
+                ,'年龄格式不正确'
+            ]
+
+        });
 
         //监听提交
         form.on('submit(demo1)', function(data){
@@ -131,17 +145,17 @@
             $.ajax({
                 type:"post",
                 url:"update",
-                data:JSON.stringify(data.field),
+                data:data.field,
                 dataType:"json",
                 success:function(data){  //{code:1,info:....}
-                    if(data.code == 0){
+                    // if (data.code == 0) {
                         var t = parent.layui.table;
                         t.reload('demo');// 重新加载页面,demo 表示父窗体table标签的id值
                         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                         parent.layer.close(index); //再执行关闭
-                    }else{
-                        alert(data.info);
-                    }
+                    // } else {
+                    //     alert(code.info);
+                    // }
                 }
             })
 
