@@ -183,8 +183,8 @@ public class TestPaperServiceImpl implements TestPaperService {
 
 
     @Override
-    public ESinglequestions updateSingleQuestions(int sqId) {
-        return singlequestionsDao.updateSingleQuestions(sqId);
+    public void updateSingleQuestions(ESinglequestions singlequestions) {
+        singlequestionsDao.updateSingleQuestions(singlequestions);
     }
 
     @Override

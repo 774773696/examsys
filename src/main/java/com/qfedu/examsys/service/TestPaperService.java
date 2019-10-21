@@ -50,7 +50,7 @@ public interface TestPaperService {
 
 
 
-    public ESinglequestions updateSingleQuestions(int sqId);
+    public void updateSingleQuestions(ESinglequestions singlequestions);
 
     public EAnswerquestions updateAnswerquestions(int aqId);
 

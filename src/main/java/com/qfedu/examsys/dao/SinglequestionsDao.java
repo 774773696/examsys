@@ -17,5 +17,6 @@ public interface SinglequestionsDao {
     public void delSingleQuestions(int sqId);
 
 
-    public ESinglequestions updateSingleQuestions(int sqId);
+    //更新一条数据
+    public void updateSingleQuestions(ESinglequestions ESinglequestions);
 }

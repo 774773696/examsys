@@ -146,7 +146,53 @@ public class TestPaperController {
         }
     }
 
+    @RequestMapping("/modifiedTestPaper.do")
+    public JsonBean modifiedTestPaper(ESinglequestions singlequestions) {
+        System.out.println(singlequestions.getSqId()
+                +singlequestions.getSoptiona()
+                +singlequestions.getSoptionb()
+                +singlequestions.getSoptionc()
+                +singlequestions.getSoptiond()
+                +singlequestions.getSanswer()
+                +singlequestions.getStitle()
+        );
+        if (singlequestions !=null){
+            testPaperService.updateSingleQuestions(singlequestions);
+            return new JsonBean(0, null);
 
+        }
+/*        String sqId = request.getParameter("sqId");
+        String aqId = request.getParameter("aqId");
+        String yqId = request.getParameter("yqId");
+        String mqId = request.getParameter("mqId");*/
+/*        System.out.println(sqId+"sqId");
+        System.out.println(aqId+"aqId");
+        System.out.println(yqId+"yqId");
+        System.out.println(mqId+"mqId");*/
+
+                 /*  if (sqId != null){
+                testPaperService.delSingleQuestions(Integer.valueOf(sqId));
+                return new JsonBean(0, null);
+            }
+            if(aqId != null){
+                testPaperService.delAnswerquestions(Integer.valueOf(aqId));
+                return new JsonBean(0, null);
+
+            }
+            if(yqId != null){
+                testPaperService.delYnquestions(Integer.valueOf(yqId));
+                return new JsonBean(0, null);
+
+            }
+            if(mqId != null){
+                testPaperService.delMulquestions(Integer.valueOf(mqId));
+                return new JsonBean(0, null);
+*/
+//        }
+        return new JsonBean(1, "error");
+
+
+    }
 
 
 }
