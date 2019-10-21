@@ -38,8 +38,59 @@
     </select>
 
     <insert id="add" parameterType="com.qfedu.examsys.pojo.EUser">
-        insert into e_user(uname, upassword, unumber, usex, uage, uprofession, ugrade, uphone)
-        values(#{uname}, #{upassword}, #{unumber}, #{usex}, #{uage}, #{uprofession}, #{ugrade}, #{uphone})
+        insert into e_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uname != null">
+                uname,
+            </if>
+            <if test="upassword != null">
+                upassword,
+            </if>
+            <if test="unumber != null">
+                unumber,
+            </if>
+            <if test="uage != null">
+                uage,
+            </if>
+            <if test="usex != null">
+                usex,
+            </if>
+            <if test="uprofession != null">
+                uprofession,
+            </if>
+            <if test="ugrade != null">
+                ugrade,
+            </if>
+            <if test="uphone != null">
+                uphone
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uname != null">
+                #{uname},
+            </if>
+            <if test="upassword != null">
+                #{upassword},
+            </if>
+            <if test="unumber != null">
+                #{unumber},
+            </if>
+            <if test="uage != null">
+                #{uage},
+            </if>
+            <if test="usex != null">
+                #{usex},
+            </if>
+            <if test="uprofession != null">
+                #{uprofession},
+            </if>
+            <if test="ugrade != null">
+                #{ugrade},
+            </if>
+            <if test="uphone != null">
+                #{uphone}
+            </if>
+        </trim>
     </insert>
 
     <delete id="delete" parameterType="integer">
