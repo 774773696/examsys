@@ -1,7 +1,9 @@
 package com.qfedu.examsys.vo;
 
+import com.qfedu.examsys.pojo.ETestpaper;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -17,4 +19,5 @@ public class ESmVo {
     private Date smBeginTime;
     private Date smEndTime;
     private String subjectName;
+
 }

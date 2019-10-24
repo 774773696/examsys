@@ -37,7 +37,6 @@ public class ESessionMangeController {
         List<ESmVo> list = eSessionMangeService.findAllSessionMangeByPage(page, limit,tpTitle, smBeginTime,subjectName);
         long total = ((Page) list).getTotal();
 
-
         Map<String, Object> map = new HashMap<>();
         map.put("code", 0);
         map.put("msg", "");

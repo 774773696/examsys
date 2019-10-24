@@ -34,7 +34,7 @@
 					</div>
 				<!--</div>-->
                 <div class="layui-input-inline">
-                    <select name="subjectName" id="subjectName" class="subjectName">
+                    <select name="subjectName" id="subjectName" class="subjectName" lay-filter="test">
                         <option value="">请选择课程</option>
                     </select>
                 </div>
@@ -47,14 +47,14 @@
     <div id="add-main" style="display: none;margin-left:80px" >
         <form class="layui-form" id="add-form" action="" onsubmit="return false" >
             
-            <!--<div class="layui-form-item">
+            <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 90px">考试科目</label>
                 <div class="layui-input-inline" style="width: 240px">
                     <select name="subjectId" id="subjectId"  class="subjectId" lay-filter="test" lay-verify="required">
                         <option value="">请选择科目</option>
                     </select>
                 </div>
-            </div>-->
+            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label" style="width: 90px">考试试卷</label>
                 <div class="layui-input-inline" style="width: 240px">
@@ -82,7 +82,7 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <div class="layui-input-block">
+                <div class="layui-input-block" id="can">
                     <button class="layui-btn" lay-submit lay-filter="save" id="zcyz">提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
@@ -147,8 +147,32 @@
 			  });
 
         selectSubjectName();
-        selectSessionMenu();
+        // selectSessionMenu();
+        selectSubjectName2();
 
+        form.on('select(test)', function(data){
+            // alert(data.value);
+
+            console.log(data.valueOf());
+            var sid=data.value;
+            $.ajax({
+                type:"post",
+                url:"findtestpaperbyid.do?subjectId="+sid,
+                dataType:"json",
+                success:function(data){
+                    $("#tpid").empty();
+                    var list=data.info;
+                    var tpid = $(".tpid")
+                    for(var i=0;i<list.length;i++){
+                        var option = $("<option value ="+list[i].tpid+">"+list[i].tptitle+"</option>>");
+                        tpid.append(option)
+                    }
+
+                    form.render("select");
+
+                }
+            });
+        });
 
         //执行一个 table 实例
         var _thisTable =  table.render({
@@ -376,27 +400,45 @@
             });
 
         }
-			
-	
 
-        function selectSessionMenu() {
+        function selectSubjectName2() {
             $.ajax({
                 type:"post",
-                url:"findAllTestPaper.do",
+                url:"subjectlist.do",
                 dataType:"json",
                 success:function(data){
-                   var list=data.info;
-				   var tpid = $(".tpid")
-				   for(var i=0;i<list.length;i++){
-				   	var option = $("<option value ="+list[i].tpid+">"+list[i].tptitle+"</option>>");
-                        tpid.append(option)
-				   }
-         								
-         	form.render("select");
+                    var list = data.info;    //返回的数据
+                    var subjectId = $(".subjectId")
+                    for(var i=0;i<list.length;i++){
+                        var option = $("<option value ="+list[i].subjectId+">"+list[i].subjectName+"</option>>");
+                        subjectId.append(option)
+                    }
+                    form.render("select");
                 }
             });
+
         }
-        
+
+        // function selectSessionMenu() {
+        //     $.ajax({
+        //         type:"post",
+        //         url:"findAllTestPaper.do",
+        //         dataType:"json",
+        //         success:function(data){
+        //            var list=data.info;
+		// 		   var tpid = $(".tpid")
+		// 		   for(var i=0;i<list.length;i++){
+        //                    var option = $("<option value ="+list[i].tpid+">"+list[i].tptitle+"</option>>");
+        //                    tpid.append(option)
+		// 		   }
+        //
+        //  	form.render("select");
+        //         }
+        //     });
+        // }
+
+
+
         
          var regIsCommitOldPass=false;
         var regIsCommitPsw=false;
@@ -426,8 +468,7 @@
                 }
                 
           });
-          
-       
+
        });
 
     });
